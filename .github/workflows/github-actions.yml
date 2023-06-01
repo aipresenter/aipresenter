@@ -1,8 +1,6 @@
 name: Python package
 
-on:
-  pull_request: 
-    types: [opened, reopened, review_requested]
+on: [pull_request_target]
 
 jobs:
   build:
