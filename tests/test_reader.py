@@ -3,11 +3,11 @@ from sample.reader import Reader
 
 class TestAdd(unittest.TestCase):
     def testReader(self):
-        x = Reader('sample/text.yml')
-        x.read_file()
+        x = Reader('tests/text.yml')
         a = x.get_actors()
-        expected_dict = {'name': 'John Doe', 'description': 'A charismatic detective', 'voice_type': 'Baritone', 'age': 35, 'height': '6 feet'}
-        self.assertDictEqual(a[0], expected_dict)
+        for actor in ['John Doe', 'Jane Smith', 'Michael Johnson']:
+            self.assertIn(actor, a)
+        
             
             
 if __name__ == '__main__':

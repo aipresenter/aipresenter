@@ -1,42 +1,41 @@
 import yaml
 
+class Actor:
+    def __init__(self, data):
+        self.name = data['name']
+        self.description = data['description']
+        self.voice_type = data['voice_type']
+        self.age = data['age']
+        self.height = data['height']
+        
 class Reader:
     
     def __init__(self, file_path):
         self.file_path = file_path
         self.data = {}
         self.actors = {}
-        self.scenes = {}
-        self.locations = {}
-    
-    def read_file(self):
-        try:
-            with open(self.file_path, 'r') as file:
-                self.data = yaml.safe_load(file)
-                return self.data
-        except FileNotFoundError:
-            return "File not found."
-        
+        with open(self.file_path, 'r') as file:
+            self.data = yaml.safe_load(file)
+        for actor in self.data['actors']:
+            a = Actor(actor)
+            self.actors[a.name] = a
+            
         
     def get_actors(self):
-        i = 0
-        for actor in self.data['actors']:
-            self.actors[i] = actor
-            i = i + 1
-        return self.actors
-                 
+        return self.actors 
+        
+    
     def get_scenes(self):
-        i = 0
-        for scene in self.data['scenes']:
-            self.scenes[i] = scene
-            i = i + 1
-        return self.scenes 
+        return self._get_data_element('scenes') 
+    
     
     def get_locations(self):
-        i = 0
-        for location in self.data['locations']:
-            self.locations[i] = location
-            i = i + 1
-        return self.locations 
+        return self._get_data_element('locations') 
         
-    ## def print(self):
+    
+    def _get_data_element(self, element):
+        return self.data[element]
+    
+    
+    def print(self):
+        yaml.dump(self.data, default_flow_style=False)
