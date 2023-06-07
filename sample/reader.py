@@ -21,8 +21,8 @@ class Reader:
             s = Scene(scene)
             self.scenes[s.name] = s
         for location in self.data['locations']:
-            l = Location(location)
-            self.locations[l.name] = l
+            loc = Location(location)
+            self.locations[loc.name] = loc
             
         
     def get_actors(self):
