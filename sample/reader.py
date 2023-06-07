@@ -1,26 +1,8 @@
 import yaml
-
-class Actor:
-    def __init__(self, data):
-        self.name = data['name']
-        self.description = data['description']
-        self.voice_type = data['voice_type']
-        self.age = data['age']
-        self.height = data['height']
-        
-class Scene:
-    def __init__(self, data):
-        self.name = data['name']
-        self.location = data['location']
-        self.actors = data['actors']
-        self.dialogue = data['dialogue']
-        
-
-class Location:
-    def __init__(self, data):
-        self.name = data['name']
-        self.type = data['type']
-        self.lighting = data['lighting']
+from sample.database import Database
+from sample.database import Actor
+from sample.database import Scene
+from sample.database import Location
         
 class Reader:
     
@@ -58,6 +40,10 @@ class Reader:
     def _get_data_element(self, element):
         return self.data[element]
     
+    
+    def get_db(self):
+        return Database(self.actors, self.scenes, self.locations)
+       
     
     def print(self):
         yaml.dump(self.data, default_flow_style=False)
