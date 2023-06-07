@@ -1,4 +1,4 @@
-from sample.database import Database, Actor, Scene, Location
+from sample.database import Database
 
 
 class TextAi:
