@@ -10,6 +10,8 @@ def main():
     generator = ai_presenter.Generators(text_fake, voice_fake, image_fake)
     
     ai = ai_presenter.AIPresenter(db, generator)
+    
+    ai.run()
 
 
 
