@@ -1,5 +1,5 @@
 import unittest
-from sample.reader import Reader
+from ai_presenter.reader import Reader
 
 class TestReader(unittest.TestCase):
     def testReader(self):

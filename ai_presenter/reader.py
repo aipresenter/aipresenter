@@ -1,8 +1,8 @@
 import yaml
-from sample.database import Database
-from sample.database import Actor
-from sample.database import Scene
-from sample.database import Location
+from ai_presenter.database import Database
+from ai_presenter.database import Actor
+from ai_presenter.database import Scene
+from ai_presenter.database import Location
         
 class Reader:
     

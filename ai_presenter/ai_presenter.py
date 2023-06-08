@@ -1,4 +1,4 @@
-from sample.database import Database
+from ai_presenter.database import Database
 
 
 class TextAi:
@@ -71,7 +71,7 @@ class ImageAIFake(ImageAI):
     
     
     
-class Generator:
+class Generators:
     
     def __init__(self, t: TextAi, v: VoiceAI, i: ImageAI):
         self.text_ai = t
@@ -79,13 +79,22 @@ class Generator:
         self.image_ai = i
     
     
-    def get_text(self):
-        return self.text_ai.generate()
+    def get_text(self) -> TextAi:
+        return self.text_ai
     
     
-    def get_image(self):
-        return self.image_ai.generate()
+    def get_image(self) -> ImageAI:
+        return self.image_ai
     
     
-    def get_voice(self):
-        return self.voice_ai.generate()
+    def get_voice(self) -> VoiceAI:
+        return self.voice_ai
+    
+    
+class AIPresenter:
+    def __init__(self, db: Database, g: Generators):
+        pass
+    
+    
+    def run(self):
+        pass

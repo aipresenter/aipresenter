@@ -1,5 +1,5 @@
 import unittest
-from sample.sample import Adder
+from ai_presenter.sample import Adder
 
 class TestAdd(unittest.TestCase):
     def testAdd(self):
