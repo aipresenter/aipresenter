@@ -1,0 +1,3 @@
+John Doe, a charismatic detective and Jane Smith, a brilliant scientist are at a crime scene in a cabin. Build a scene about them with this dialogue: actor: John Doe says, "I need to examine the evidence carefully." Jane Smith says, "Let's analyze the DNA samples." Be sure to expand on this dialogue and include many details
+
+Now lead the story into a scene where Michael Johnson, a wise mentor, and John Doe are in the Interrogation room at the police station. John Doe says, "Tell me everything you know about the suspect." Michael Johnson says, "I'll use my negotiation skills to get the truth." Make sure to include lots of intense dialogue and details.

@@ -104,4 +104,6 @@ class AIPresenter:
         for key, scene in self.database.scenes.items():
             logging.info(f" Working on scene: {scene.name} in {scene.location}")
             
-        #
+        #chatGPT is fricking amazing
+        #working idea rn is feed chat gpt the scene in the format of "{character, description}* are at scene in location. {character says, dialogue}*. Build scene from this and make sure to include lots of intense dialogue and details.
+        
