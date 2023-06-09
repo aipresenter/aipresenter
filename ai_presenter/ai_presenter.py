@@ -1,4 +1,5 @@
 from ai_presenter.database import Database
+import logging
 
 
 class TextAi:
@@ -93,8 +94,14 @@ class Generators:
     
 class AIPresenter:
     def __init__(self, db: Database, g: Generators):
-        pass
+        self.database = db
+        self.generator = g
     
     
     def run(self):
-        pass
+        logging.info("it runs")
+        #go through each scene
+        for key, scene in self.database.scenes.items():
+            logging.info(f" Working on scene: {scene.name} in {scene.location}")
+            
+        #

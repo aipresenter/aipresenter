@@ -1,0 +1,58 @@
+actors:
+  - name: John Doe
+    description: A charismatic detective
+    voice_type: Baritone
+    age: 35
+    height: 6 feet
+
+  - name: Jane Smith
+    description: A brilliant scientist
+    voice_type: Soprano
+    age: 28
+    height: 5 feet 8 inches
+
+  - name: Michael Johnson
+    description: A wise mentor
+    voice_type: Bass
+    age: 42
+    height: 6 feet 2 inches
+
+locations:
+  - name: Mountains
+    type: outside
+    lighting: Daylight
+
+  - name: Cabin
+    type: inside
+    lighting: Dim
+
+scenes:
+  - name: Crime Scene
+    location: Cabin
+    actors:
+      - John Doe
+      - Jane Smith
+    dialogue:
+      - actor: John Doe
+        text: "I need to examine the evidence carefully."
+      - actor: Jane Smith
+        text: "Let's analyze the DNA samples."
+
+  - name: Interrogation Room
+    location: Police Station
+    actors:
+      - John Doe
+      - Michael Johnson
+    dialogue:
+      - actor: John Doe
+        text: "Tell me everything you know about the suspect."
+      - actor: Michael Johnson
+        text: "I'll use my negotiation skills to get the truth."
+
+  - name: Laboratory
+    location: Cave
+    actors:
+      - Jane Smith
+    dialogue:
+      - actor: Jane Smith
+        text: "I believe I've made a groundbreaking discovery."
