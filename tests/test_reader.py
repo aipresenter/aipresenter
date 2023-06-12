@@ -24,7 +24,5 @@ class TestReader(unittest.TestCase):
         self.assertDictEqual(loc, db.locations)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

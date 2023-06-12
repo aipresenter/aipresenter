@@ -1,21 +1,29 @@
+config:
+  ai_config:
+    chatgpt_config:
+      style: you are a whimsical storyteller
+
 actors:
   - name: John Doe
     description: A charismatic detective
     voice_type: Baritone
     age: 35
     height: 6 feet
+    gender: male
 
   - name: Jane Smith
     description: A brilliant scientist
     voice_type: Soprano
     age: 28
     height: 5 feet 8 inches
+    gender: female
 
   - name: Michael Johnson
     description: A wise mentor
     voice_type: Bass
     age: 42
     height: 6 feet 2 inches
+    gender: male
 
 locations:
   - name: Mountains
@@ -39,7 +47,7 @@ scenes:
         text: "Let's analyze the DNA samples."
 
   - name: Interrogation Room
-    location: Cabin
+    location: Police Station
     actors:
       - John Doe
       - Michael Johnson
@@ -50,7 +58,7 @@ scenes:
         text: "I'll use my negotiation skills to get the truth."
 
   - name: Laboratory
-    location: Cabin
+    location: Cave
     actors:
       - Jane Smith
     dialogue:
