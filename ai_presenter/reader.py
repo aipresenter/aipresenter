@@ -1,5 +1,5 @@
 import yaml
-from ai_presenter.database import Database, Actor, Scene, Location, Config 
+from ai_presenter.database import Database, Actor, Scene, Location, Config
 
 
 class Reader:
@@ -35,7 +35,7 @@ class Reader:
         return self.data[element]
 
     def get_db(self):
-        return Database(config=self.config, 
+        return Database(config=self.config,
                         actors=self.actors,
                         scenes=self.scenes,
                         locations=self.locations)

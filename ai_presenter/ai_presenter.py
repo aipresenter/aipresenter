@@ -10,7 +10,7 @@ class TextAi:
 
     def generate(self):
         pass
-    
+
     def send(self, text) -> str:
         pass
 
@@ -21,7 +21,7 @@ class TextFake(TextAi):
 
     def generate(self):
         pass
-    
+
     def send(self, text) -> str:
         logging.info(f"textfake: Sending {text}")
         return "text fake hehe"
@@ -96,21 +96,24 @@ class AIPresenter:
         logging.info("it runs")
         textai = self.generator.get_text()
         textai.send(self.database.config.ai_config.chatgptconfig.style)
-        
+
         message = ''
         for key, actor in self.database.actors.items():
-            message += f'{actor.name} is a {actor.age} year old {actor.gender}, {actor.description}. '
+            message += f'{actor.name} is a {actor.age} year old \
+                {actor.gender}, {actor.description}. '
         textai.send(message)
-        
+
         # go through each scene
         for key, scene in self.database.scenes.items():
-            logging.info(f"** Working on scene:{scene.name} in {scene.location}")
+            logging.info(f"** Working on scene:{scene.name} in \
+                {scene.location}")
             message = ''
             for dialogue in scene.dialogue:
                 actor = dialogue['actor']
                 text = dialogue['text']
                 message += f'{actor} says, {text}. '
-            message += 'Build a scene from this and make sure to include lots of extensive dialogue and details.'
+            message += 'Build a scene from this and make sure to include \
+                lots of extensive dialogue and details.'
             output = textai.send(message)
             logging.info(f'got back from textai: {output}')
         # chatGPT is fricking amazing
