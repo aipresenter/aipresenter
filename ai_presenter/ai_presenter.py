@@ -105,15 +105,14 @@ class AIPresenter:
 
         # go through each scene
         for key, scene in self.database.scenes.items():
-            logging.info(f"** Working on scene:{scene.name} in \
-                {scene.location}")
+            logging.info(f"** Working on scene:{scene.name} in "+
+                f"{scene.location}")
             message = ''
             for dialogue in scene.dialogue:
                 actor = dialogue['actor']
                 text = dialogue['text']
                 message += f'{actor} says, {text}. '
-            message += 'Build a scene from this and make sure to include \
-                lots of extensive dialogue and details.'
+            message += "build a scene from this and make sure to include lots of extensive dialogue and details."
             output = textai.send(message)
             logging.info(f'got back from textai: {output}')
         # chatGPT is fricking amazing
@@ -121,3 +120,4 @@ class AIPresenter:
         # "{character, description}* are at scene in location.
         # {character says, dialogue}*. Build scene from this and make
         # sure to include lots of intense dialogue and details.
+        # provide voice ai with input(filename), output(filename), and configuration(which voice)
