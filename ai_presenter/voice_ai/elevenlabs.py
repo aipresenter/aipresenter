@@ -3,7 +3,7 @@ from ai_presenter.database import Database, VoiceConfig
 import logging
 
 
-class VoiceAIFake(VoiceAI):
+class ElevenLabs(VoiceAI):
     def __init__(self, db: Database):
         super().__init__(db)
 
