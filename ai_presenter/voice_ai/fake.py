@@ -1,4 +1,4 @@
-from ai_presenter.voice_ai.voicebase import VoiceAI
+from ai_presenter.voice_ai.base import VoiceAI
 
 
 class VoiceAIFake(VoiceAI):

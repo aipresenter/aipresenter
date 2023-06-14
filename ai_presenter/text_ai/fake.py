@@ -1,4 +1,4 @@
-from ai_presenter.text_ai.textbase import TextAi
+from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database
 import logging
 
