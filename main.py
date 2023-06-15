@@ -1,9 +1,9 @@
 from ai_presenter.ai_presenter import AIPresenter
 from ai_presenter.reader import Reader
-from ai_presenter.text_ai.textfake import TextFake
-from ai_presenter.image_ai.imagefake import ImageAIFake
+from ai_presenter.text_ai.fake import TextFake
+from ai_presenter.image_ai.fake import ImageAIFake
 from ai_presenter.ai_presenter import Generators
-from ai_presenter.voice_ai.voicefake import VoiceAIFake
+from ai_presenter.voice_ai.fake import VoiceAIFake
 import logging
 
 

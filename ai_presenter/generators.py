@@ -1,6 +1,6 @@
-from ai_presenter.text_ai.textbase import TextAi
-from ai_presenter.voice_ai.voicebase import VoiceAI
-from ai_presenter.image_ai.imagebase import ImageAI
+from ai_presenter.text_ai.base import TextAi
+from ai_presenter.voice_ai.base import VoiceAI
+from ai_presenter.image_ai.base import ImageAI
 
 
 class Generators:

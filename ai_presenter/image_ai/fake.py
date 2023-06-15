@@ -1,4 +1,4 @@
-from ai_presenter.image_ai.imagebase import ImageAI
+from ai_presenter.image_ai.base import ImageAI
 
 
 class ImageAIFake(ImageAI):

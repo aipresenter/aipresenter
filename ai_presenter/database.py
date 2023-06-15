@@ -29,18 +29,3 @@ class Location:
         self.name = data['name']
         self.type = data['type']
         self.lighting = data['lighting']
-
-
-class Config:
-    def __init__(self, data):
-        self.ai_config = AIConfig(data['ai_config'])
-
-
-class AIConfig:
-    def __init__(self, data):
-        self.chatgptconfig = ChatGPTConfig(data['chatgpt_config'])
-
-
-class ChatGPTConfig:
-    def __init__(self, data):
-        self.style = data['style']
