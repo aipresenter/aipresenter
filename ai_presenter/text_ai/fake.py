@@ -12,4 +12,4 @@ class TextFake(TextAi):
 
     def send(self, text) -> str:
         logging.info(f"textfake: Sending {text}")
-        return "text fake hehe"
+        return text
