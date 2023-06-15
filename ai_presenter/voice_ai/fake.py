@@ -24,14 +24,13 @@ class VoiceAIFake(VoiceAI):
 
         logging.info(f'VoiceAIFake: Opening input file: {input_file} and ' +
                      'extracting send info')
-        # with open(input_file, 'r') as input:
-        #    text = input.read()
+        with open(input_file, 'r') as input:
+            text = input.read()
 
         logging.info('VoiceAIFake: Generating audio file')
 
         with open(output_file, 'w') as out:
-            out.write()
+            out.write(text)
 
         logging.info(f'VoiceAIFake: Closing input file: {input_file}')
         logging.info(f"VoiceAIFake: generated audio found in {output_file}")
-        return out
