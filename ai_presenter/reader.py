@@ -1,5 +1,6 @@
 import yaml
-from ai_presenter.database import Database, Actor, Scene, Location, Config
+from ai_presenter.database import Database, Actor, Scene, Location
+from ai_presenter.config.config import Config
 
 
 class Reader:
