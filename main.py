@@ -15,7 +15,7 @@ def main():
 
     text_fake = TextFake(db)
     image_fake = ImageAIFake()
-    voice_fake = VoiceAIFake()
+    voice_fake = VoiceAIFake(db)
     generator = Generators(text_fake, voice_fake, image_fake)
 
     ai = AIPresenter(db, generator)
