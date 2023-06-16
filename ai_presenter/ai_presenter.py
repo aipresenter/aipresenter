@@ -24,11 +24,11 @@ class AIPresenter:
             for key, scene in self.database.scenes.items():
                 logging.info(f"******** \nWorking on scene: {scene.name} in " +
                              f"{scene.location}")
-                output = AIPresenter.generate_ai(self, scene, textai)
+                output = AIPresenter.__get_scene_text(self, scene, textai)
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
 
-    def generate_ai(self, scene, textai):
+    def __get_scene_text(self, scene, textai):
         # go through each scene
         message = ''
         for dialogue in scene.dialogue:
