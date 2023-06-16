@@ -27,8 +27,6 @@ class AIPresenter:
                 output = AIPresenter.generate_ai(self, scene, textai)
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
-            # Write a newline character at the end of the file
-            file.write("\n")
 
     def generate_ai(self, scene, textai):
         # go through each scene
