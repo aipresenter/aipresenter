@@ -19,19 +19,26 @@ class AIPresenter:
                 f' {actor.gender}, {actor.description}. '
         textai.send(message)
 
+        with open('text_ai.txt', 'w') as file:
+            textai = self.generator.get_text()
+            for key, scene in self.database.scenes.items():
+                logging.info(f"******** \nWorking on scene: {scene.name} in " +
+                             f"{scene.location}")
+                output = AIPresenter.__get_scene_text(self, scene, textai)
+                file.write(output + '\n')
+                logging.info(f'got back from textai: {output}')
+
+    def __get_scene_text(self, scene, textai):
         # go through each scene
-        for key, scene in self.database.scenes.items():
-            logging.info(f"********* \nWorking on scene: {scene.name} in " +
-                         f"{scene.location}")
-            message = ''
-            for dialogue in scene.dialogue:
-                actor = dialogue['actor']
-                text = dialogue['text']
-                message += f'{actor} says, \"{text}\". '
-            message += "Build a scene from this and make sure to" + \
-                " include lots of extensive dialogue and details."
-            output = textai.send(message)
-            logging.info(f'got back from textai: {output}')
+        message = ''
+        for dialogue in scene.dialogue:
+            actor = dialogue['actor']
+            text = dialogue['text']
+            message += f'{actor} says, \"{text}\". '
+        message += "Build a scene from this and make sure to" + \
+            " include lots of extensive dialogue and details."
+        output = textai.send(message)
+        return output
         # chatGPT is fricking amazing
         # working idea rn is feed chat gpt the scene in the format of
         # "{character, description}* are at scene in location.
