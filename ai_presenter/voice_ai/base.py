@@ -1,5 +1,6 @@
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
+import logging
 
 
 class VoiceAI:
@@ -9,4 +10,4 @@ class VoiceAI:
         self.locations = db.locations
 
     def generate(self, input_file, output_file, c: VoiceConfig):
-        pass
+        logging.info("VoiceAI generating")
