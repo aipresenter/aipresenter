@@ -1,5 +1,6 @@
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
+import ai_presenter.config.defaults
 import logging
 from ai_presenter.voice_ai.base import VoiceAI, VoiceConfig
 
@@ -27,7 +28,8 @@ class AIPresenter:
                 f' {actor.gender}, {actor.description}. '
         # sends message to ai in given format
         textai.send(message)
-        with open('text_ai.txt', 'w') as file:
+
+        with open(ai_presenter.config.defaults.TEXT_AI_FILE, 'w') as file:
             textai = self.generator.get_text()
             for key, scene in self.database.scenes.items():
                 logging.info(f"******** \nWorking on scene: {scene.name} in " +
