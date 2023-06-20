@@ -4,6 +4,9 @@ class Database:
         self.scenes = scenes
         self.locations = locations
         self.config = config
+        
+    def get_config(self):
+        return self.config
 
 
 class Actor:

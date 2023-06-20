@@ -1,6 +1,5 @@
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
-import ai_presenter.config.defaults
 import logging
 from ai_presenter.voice_ai.base import VoiceAI, VoiceConfig
 
