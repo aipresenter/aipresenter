@@ -1,6 +1,7 @@
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
 import logging
+from ai_presenter.voice_ai.base import VoiceAI, VoiceConfig
 
 
 class AIPresenter:
@@ -9,24 +10,36 @@ class AIPresenter:
         self.generator = g
 
     def run(self):
-        logging.info("it runs")
-        textai = self.generator.get_text()
-        textai.send(self.database.config.ai_config.chatgptconfig.style)
+        self.__run_text_ai()
+        self.__run_voice_ai()
 
+    def __run_text_ai(self):
+        logging.info("running text ai")
+        # calls get_text and puts it into textai
+        textai = self.generator.get_text()
+        # sends textai to chatgtp config
+        textai.send(self.database.config.ai_config.chatgptconfig.style)
+        # creates a message string variable
         message = ''
+        # goes through each actor
         for key, actor in self.database.actors.items():
             message += f'{actor.name} is a {actor.age} year old' + \
                 f' {actor.gender}, {actor.description}. '
+        # sends message to ai in given format
         textai.send(message)
-
         with open('text_ai.txt', 'w') as file:
             textai = self.generator.get_text()
             for key, scene in self.database.scenes.items():
                 logging.info(f"******** \nWorking on scene: {scene.name} in " +
                              f"{scene.location}")
-                output = AIPresenter.__get_scene_text(self, scene, textai)
+                output = self.__get_scene_text(scene, textai)
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
+
+    def __run_voice_ai(self):
+        voiceai = VoiceAI(self.database)
+        voiceconfig = VoiceConfig()
+        voiceai.generate('text_ai.txt', 'voice_ai.txt', voiceconfig)
 
     def __get_scene_text(self, scene, textai):
         # go through each scene
