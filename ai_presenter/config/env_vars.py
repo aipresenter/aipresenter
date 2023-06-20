@@ -1,0 +1,4 @@
+import os
+
+ELEVENLABS_APIKEY = os.getenv('ELEVENLABS_APIKEY')
+CHATGPT_APIKEY = os.getenv('CHATGPT_APYKEY')
