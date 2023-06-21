@@ -12,7 +12,7 @@ class VoiceAIActorFake(VoiceAIActor):
     def says(self, message, emotion, filename):
         # .says takes the message and generates audio from that message
         # this audio gets saved to a file
-        # personally don't think says needs a file passed to it bc 
+        # personally don't think says needs a file passed to it bc
         # note: for the real voiceaiactor class, the elevenlabs generate
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
