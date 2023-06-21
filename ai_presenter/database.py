@@ -5,6 +5,9 @@ class Database:
         self.locations = locations
         self.config = config
 
+    def get_config(self):
+        return self.config
+
 
 class Actor:
     def __init__(self, data):

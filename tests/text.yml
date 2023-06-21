@@ -1,5 +1,7 @@
 config:
   ai_config:
+    text_ai_filename: text_ai.txt
+    voice_ai_filename: voice_ai.txt
     chatgpt_config:
       style: you are a whimsical storyteller
 

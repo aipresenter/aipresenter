@@ -11,7 +11,8 @@ pluggy==1.0.0
 pycodestyle==2.10.0
 pyflakes==3.0.1
 pyproject_api==1.5.1
+python-dotenv==1.0.0
 PyYAML==6.0
-ruff==0.0.271
+ruff==0.0.272
 tox==4.5.2
 virtualenv==20.23.0
