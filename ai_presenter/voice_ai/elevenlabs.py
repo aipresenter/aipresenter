@@ -1,5 +1,6 @@
 from ai_presenter.voice_ai.base import VoiceAI
-from ai_presenter.database import Database, VoiceConfig
+from ai_presenter.database import Database
+from ai_presenter.config.voice import VoiceConfig
 import logging
 
 
@@ -21,4 +22,3 @@ class ElevenLabs(VoiceAI):
 
     def generate(self, input_file, output_file, c: VoiceConfig):
         logging.info('Generating audio file')
-        pass

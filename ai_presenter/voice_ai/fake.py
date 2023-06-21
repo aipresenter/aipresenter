@@ -1,12 +1,30 @@
-from ai_presenter.voice_ai.base import VoiceAI
+from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
 import logging
 
 
+# This new idea changes the way generate could work, see lines 38 to 41
+class VoiceAIActorFake(VoiceAIActor):
+    def __init__(self, config: VoiceConfig):
+        super().__init__(config)
+
+    def says(self, message, emotion, filename):
+        # .says takes the message and generates audio from that message
+        # this audio gets saved to a file
+        # personally don't think says needs a file passed to it bc 
+        # note: for the real voiceaiactor class, the elevenlabs generate
+        # methods return raw data called audio which can be manipulated before
+        # saving to a file(ie. concatenation)
+        return message
+
+
 class VoiceAIFake(VoiceAI):
     def __init__(self, db: Database):
         super().__init__(db)
+
+    def new_actor(self, config):
+        return VoiceAIActorFake(config)
 
     # sets up config
     # opens the file
@@ -18,7 +36,6 @@ class VoiceAIFake(VoiceAI):
     # ai does its thingy and returns voice data
     # output file opened and voice data is written to output_file
     # this is saved into output file
-    # return output file
     def generate(self, input_file: str, output_file: str, c: VoiceConfig):
         logging.info('Setting voice configuration')
 
@@ -34,3 +51,9 @@ class VoiceAIFake(VoiceAI):
 
         logging.info(f'VoiceAIFake: Closing input file: {input_file}')
         logging.info(f"VoiceAIFake: generated audio found in {output_file}")
+
+    # generate could instead be a series of voiceaiactor.says() calls
+    # which return the audio data/messages. This can then be concatenated
+    # together and saved to given file
+    # generate wouldn't need voice config passed in anymore because says
+    # method in voiceaiactor already has it
