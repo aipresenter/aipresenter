@@ -4,7 +4,7 @@ from ai_presenter.config.voice import VoiceConfig
 import logging
 
 
-# This new idea changes the way generate could work, see lines 38 to 41
+# This new idea changes the way generate could work, see lines 55 to 59
 class VoiceAIActorFake(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
