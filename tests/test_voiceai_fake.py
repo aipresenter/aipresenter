@@ -34,5 +34,6 @@ class TestVoiceAIFake(unittest.TestCase):
         self.assertIn('description', out_data)
         self.assertIn('message', in_data)
 
+
 if __name__ == '__main__':
     unittest.main()
