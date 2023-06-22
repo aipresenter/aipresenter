@@ -1,6 +1,8 @@
 from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
+from elevenlabs import Voice, Iterator
+import json
 import logging
 
 
@@ -9,17 +11,22 @@ class VoiceAIActorFake(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
-    def says(self, message, emotion):
+    def says(self, message, emotion) -> (bytes | Iterator[bytes]):
         # .says takes the message and generates audio from that message
         # this audio gets saved to a file
         # personally don't think says needs a file passed to it bc
         # note: for the real voiceaiactor class, the elevenlabs generate
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
-        logging.info(f'{self.config.name} says {message} in a {emotion} way')
-        return message
+        logging.info(f'{self.name} says {message} in a {emotion} way')
+        audio = f'name: {self.name}\ngender: {self.gender}\n' + \
+            f'age: {self.age}\naccent: {self.accent}\n' + \
+            f'accent strength: {self.accent_strength}\n' + \
+                f'description: {self.description}\n' + \
+                f'message: {message}\n\n'
+        return audio
 
-    def __get_voice(self, emotion):
+    def __get_voice(self, emotion) -> Voice:
         logging.info(f'I am {self.name}. I am a {self.age} year old ' +
                      f'{self.gender} with a {self.accent} accent. I am ' +
                      f'currently speaking in a {emotion} tone because I' +
@@ -49,12 +56,24 @@ class VoiceAIFake(VoiceAI):
         logging.info(f'VoiceAIFake: Opening input file: {input_file} and ' +
                      'extracting send info')
         with open(input_file, 'r') as input:
-            text = input.read()
+            data = json.load(input)
 
         logging.info('VoiceAIFake: Generating audio file')
+        audio = ''
+        for message in data['dialogue']:
+            character_config = VoiceConfig(message['speaker'],
+                                           self.actors[message['speaker']].
+                                           gender,
+                                           self.actors[message['speaker']].
+                                           age,
+                                           "American", 1.99,
+                                           self.actors[message['speaker']]
+                                           .description)
+            character = self.new_actor(character_config)
+            audio += character.says(message['message'], message['emotion'])
 
         with open(output_file, 'w') as out:
-            out.write(text)
+            out.write(audio)
 
         logging.info(f'VoiceAIFake: Closing input file: {input_file}')
         logging.info(f"VoiceAIFake: generated audio found in {output_file}")
