@@ -10,6 +10,15 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
+        sample_text = f'I am {self.name}. I am a {self.age} year old ' + \
+            f'{self.gender} with a {self.accent} accent.' + \
+            f'I am {self.name}. I am a {self.age} year old ' + \
+            f'{self.gender} with a {self.accent} accent.'
+        self.voice_design = VoiceDesign(name=self.name,
+                                        text=sample_text, gender=self.gender,
+                                        age=self.age, accent=self.accent,
+                                        accent_strength=self.accent_strength)
+
     # .says takes the message and generates audio from that message
     # note: for the real voiceaiactor class, the elevenlabs generate
     # methods return raw data called audio which can be manipulated before
@@ -22,17 +31,7 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
 
     def __get_voice(self, emotion) -> Voice:
         logging.info(f"Designing voice for {self.name}")
-        sample_text = f'I am {self.name}. I am a {self.age} year old ' + \
-            f'{self.gender} with a {self.accent} accent. I am' + \
-            f' currently speaking in a {emotion} tone because' + \
-            f' I am {emotion}'
-
-        voice_design = VoiceDesign(name=self.name,
-                                   text=sample_text,
-                                   gender=self.gender, age=self.age,
-                                   accent=self.accent,
-                                   accent_strength=self.accent_strength)
-        return Voice.from_design(voice_design)
+        return Voice.from_design(self.voice_design)
 
 
 class ElevenLabs(VoiceAI):
@@ -51,16 +50,17 @@ class ElevenLabs(VoiceAI):
     # this is saved into output file
     # return output file
 
-    def generate(self, input_file, output_file):
+    def generate(self, input_file: str, output_file: str):
         logging.info('Generating audio file')
         with open(input_file) as file:
             data = json.load(file)
 
         narrator_config = VoiceConfig()
         narrator = self.new_actor(narrator_config)
-        audio = narrator.says()  # need suggestions as to format of json
-                                 # as well as parsing it
-                                 
+        audio = narrator.says()
+        # need suggestions as to format of json
+        # as well as parsing it
+
         for key, message in data['dialogue'].items():
             character_config = VoiceConfig()
             character = self.new_actor(character_config)
