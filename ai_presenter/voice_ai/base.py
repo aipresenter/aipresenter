@@ -5,7 +5,11 @@ import logging
 
 class VoiceAIActor:
     def __init__(self, config: VoiceConfig):
-        self.config = config
+        self.name = config.name
+        self.gender = config.gender
+        self.age = config.age
+        self.accent = config.accent
+        self.accent_strength = config.accent_strength
 
     def says(self, message, emotion, filename):
         logging.info(f'{self.config.name} says {message} in a {emotion} way')

@@ -16,7 +16,8 @@ class VoiceAIActorFake(VoiceAIActor):
         # note: for the real voiceaiactor class, the elevenlabs generate
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
-        return message
+        logging.info(f'{self.config.name} says {message} in a {emotion} way')
+        # return message
 
 
 class VoiceAIFake(VoiceAI):
