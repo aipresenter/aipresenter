@@ -22,3 +22,7 @@ class TestVoiceAIFake(unittest.TestCase):
             out_data = output_file.read()
 
         self.assertEqual(out_data, in_data)
+
+
+if __name__ == '__main__':
+    unittest.main()

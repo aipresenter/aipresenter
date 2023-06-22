@@ -9,7 +9,7 @@ class VoiceAIActorFake(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
-    def says(self, message, emotion, filename):
+    def says(self, message, emotion):
         # .says takes the message and generates audio from that message
         # this audio gets saved to a file
         # personally don't think says needs a file passed to it bc
@@ -17,7 +17,13 @@ class VoiceAIActorFake(VoiceAIActor):
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
         logging.info(f'{self.config.name} says {message} in a {emotion} way')
-        # return message
+        return message
+
+    def __get_voice(self, emotion):
+        logging.info(f'I am {self.name}. I am a {self.age} year old ' +
+                     f'{self.gender} with a {self.accent} accent. I am ' +
+                     f'currently speaking in a {emotion} tone because I' +
+                     f' am {emotion}')
 
 
 class VoiceAIFake(VoiceAI):
