@@ -7,6 +7,7 @@ class VoiceAIActor:
     def __init__(self, config: VoiceConfig):
         self.name = config.name
         self.gender = config.gender
+        self.description = config.description
         self.age = config.age
         self.accent = config.accent
         self.accent_strength = config.accent_strength
@@ -27,7 +28,7 @@ class VoiceAI:
         self.scenes = db.scenes
         self.locations = db.locations
 
-    def generate(self, input_file, output_file, c: VoiceConfig):
+    def generate(self, input_file, output_file):
         logging.info("VoiceAI generating")
 
     def new_actor(self, config):

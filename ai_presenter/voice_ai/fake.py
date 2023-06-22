@@ -43,7 +43,7 @@ class VoiceAIFake(VoiceAI):
     # ai does its thingy and returns voice data
     # output file opened and voice data is written to output_file
     # this is saved into output file
-    def generate(self, input_file: str, output_file: str, c: VoiceConfig):
+    def generate(self, input_file: str, output_file: str):
         logging.info('Setting voice configuration')
 
         logging.info(f'VoiceAIFake: Opening input file: {input_file} and ' +
