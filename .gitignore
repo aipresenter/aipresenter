@@ -3,3 +3,4 @@ venv
 __pycache__
 *.pyc
 text_ai.txt
+output_file.txt
