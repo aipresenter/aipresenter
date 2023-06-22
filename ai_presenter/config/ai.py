@@ -22,9 +22,9 @@ class AIConfig:
 
     def get_voice_ai_filename(self) -> str:
         return self.voice_ai_filename
-    
+
     def get_elevenlabs_api_key(self) -> str:
         return ELEVENLABS_APIKEY
-    
+
     def get_chatgpt_api_key(self) -> str:
         return CHATGPT_APIKEY
