@@ -7,8 +7,5 @@ class TextAi:
         self.scenes = db.scenes
         self.locations = db.locations
 
-    def generate(self):
-        pass
-
     def send(self, text) -> str:
         pass

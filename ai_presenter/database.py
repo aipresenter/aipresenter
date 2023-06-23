@@ -1,3 +1,6 @@
+from ai_presenter.config.config import Config
+
+
 class Database:
     def __init__(self, actors=None, scenes=None, locations=None, config=None):
         self.actors = actors
@@ -5,7 +8,7 @@ class Database:
         self.locations = locations
         self.config = config
 
-    def get_config(self):
+    def get_config(self) -> Config:
         return self.config
 
 
