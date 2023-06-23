@@ -53,13 +53,16 @@ class AIPresenter:
             actor = dialogue['actor']
             text = dialogue['text']
             message += f'{actor} says, \"{text}\". '
-            message += "Build a scene from this and make sure to " + \
-                "include lots of extensive dialogue and " + \
-                "details, and return a JSON of the " + \
-                "dialogue containing the characters (their " + \
-                "name and personality, and emotion), and the dialogue " + \
-                "(speaker, message, and the emotion)"
-
+        # This message tells ChatGPT to expand on the scene input
+        # as well as the format in which to return as JSON
+        message += (
+            "Return a json, formatted so they contain Characters, "
+            "and Dialogue. Characters to start, contain their "
+            "name, personality, and emotion. Dialogue contains "
+            "speaker, emotion, and message. Make sure to "
+            "expand on the given text, adding dialogue, "
+            "detail, and emotion."
+        )
         output = textai.send(message)
         return output
         # chatGPT is fricking amazing
