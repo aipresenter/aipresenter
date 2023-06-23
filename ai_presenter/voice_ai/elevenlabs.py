@@ -2,7 +2,6 @@ from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
 from elevenlabs import generate, save, Iterator, VoiceDesign, Voice
-import json
 import logging
 
 
@@ -30,7 +29,7 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
         return audio
 
     def __get_voice(self, emotion) -> Voice:
-        logging.info(f"Designing voice for {self.name}")
+        logging.info(f"Designing a {emotion} voice for {self.name}")
         return Voice.from_design(self.voice_design)
 
 
@@ -51,19 +50,18 @@ class ElevenLabs(VoiceAI):
     # return output file
 
     def generate(self, input_file: str, output_file: str):
-        logging.info('Generating audio file')
-        with open(input_file) as file:
-            data = json.load(file)
-
-        narrator_config = VoiceConfig()
-        narrator = self.new_actor(narrator_config)
-        audio = narrator.says()
+        logging.info('ElevenLabs: Generating audio file')
         # need suggestions as to format of json
         # as well as parsing it
-
-        for key, message in data['dialogue'].items():
-            character_config = VoiceConfig()
-            character = self.new_actor(character_config)
-            audio += character.says(message.message, message.emotion)
-
+        audio = bytes()
+        with open(input_file, 'r') as file:
+            for line in file:
+                data = self.create_character_db(input_file)
+                for message in data['dialogue']:
+                    name = message['speaker']
+                    text = message['message']
+                    emotion = message['emotion']
+                    logging.info('ElevenLabs: Stitching together audio')
+                    audio += self.characters[name].says(text, emotion)
+        logging.info(f"ElevenLabs: Audio can be found in {output_file}")
         save(audio, output_file)

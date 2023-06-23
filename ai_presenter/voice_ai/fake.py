@@ -2,7 +2,6 @@ from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
 from elevenlabs import Voice, Iterator
-import json
 import logging
 
 
@@ -18,7 +17,9 @@ class VoiceAIActorFake(VoiceAIActor):
         # note: for the real voiceaiactor class, the elevenlabs generate
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
-        logging.info(f'{self.name} says {message} in a {emotion} way')
+        logging.info(f'VoiceAIActorFake: {self.name} ' +
+                     f'says {message} in a {emotion} way')
+
         audio = f'name: {self.name}\ngender: {self.gender}\n' + \
             f'age: {self.age}\naccent: {self.accent}\n' + \
             f'accent strength: {self.accent_strength}\n' + \
@@ -51,27 +52,21 @@ class VoiceAIFake(VoiceAI):
     # output file opened and voice data is written to output_file
     # this is saved into output file
     def generate(self, input_file: str, output_file: str):
-        logging.info('Setting voice configuration')
-
         logging.info(f'VoiceAIFake: Opening input file: {input_file} and ' +
-                     'extracting send info')
-        with open(input_file, 'r') as input:
-            data = json.load(input)
+                     'extracting scene info')
+
+        audio = ''
+        with open(input_file, 'r') as file:
+            for line in file:
+                data = self.create_character_db(input_file)
+                for message in data['dialogue']:
+                    name = message['speaker']
+                    text = message['message']
+                    emotion = message['emotion']
+                    logging.info('VoiceAIFake: Stitching together audio')
+                    audio += self.characters[name].says(text, emotion)
 
         logging.info('VoiceAIFake: Generating audio file')
-        audio = ''
-        for message in data['dialogue']:
-            character_config = VoiceConfig(message['speaker'],
-                                           self.actors[message['speaker']].
-                                           gender,
-                                           self.actors[message['speaker']].
-                                           age,
-                                           "American", 1.99,
-                                           self.actors[message['speaker']]
-                                           .description)
-            character = self.new_actor(character_config)
-            audio += character.says(message['message'], message['emotion'])
-
         with open(output_file, 'w') as out:
             out.write(audio)
 
@@ -83,3 +78,5 @@ class VoiceAIFake(VoiceAI):
     # together and saved to given file
     # generate wouldn't need voice config passed in anymore because says
     # method in voiceaiactor already has it
+    def __create_character_db(self, input_file: str):
+        return super().__create_character_db(input_file)
