@@ -58,7 +58,7 @@ class VoiceAIFake(VoiceAI):
         audio = ''
         with open(input_file, 'r') as file:
             for line in file:
-                data = self.create_character_db(input_file)
+                data = self.create_character_db(line)
                 for message in data['dialogue']:
                     name = message['speaker']
                     text = message['message']

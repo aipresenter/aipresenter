@@ -9,14 +9,19 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
-        sample_text = f'I am {self.name}. I am a {self.age} year old ' + \
+        self.sample_text = f'I am {self.name}. I am a {self.age} year old ' + \
             f'{self.gender} with a {self.accent} accent.' + \
             f'I am {self.name}. I am a {self.age} year old ' + \
             f'{self.gender} with a {self.accent} accent.'
+
+        logging.info(f"designing a voice for {self.name}")
         self.voice_design = VoiceDesign(name=self.name,
-                                        text=sample_text, gender=self.gender,
+                                        text=self.sample_text,
+                                        gender=self.gender,
                                         age=self.age, accent=self.accent,
                                         accent_strength=self.accent_strength)
+
+        self.voice = Voice.from_design(self.voice_design)
 
     # .says takes the message and generates audio from that message
     # note: for the real voiceaiactor class, the elevenlabs generate
@@ -25,12 +30,8 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
     def says(self, message, emotion) -> (bytes | Iterator[bytes]):
         logging.info(f'{self.name} says {message} in a {emotion} way')
         audio = generate(text=message, model="eleven_monolingual_v1",
-                         voice=self.__get_voice(emotion))
+                         voice=self.voice)
         return audio
-
-    def __get_voice(self, emotion) -> Voice:
-        logging.info(f"Designing a {emotion} voice for {self.name}")
-        return Voice.from_design(self.voice_design)
 
 
 class ElevenLabs(VoiceAI):
@@ -56,7 +57,10 @@ class ElevenLabs(VoiceAI):
         audio = bytes()
         with open(input_file, 'r') as file:
             for line in file:
-                data = self.create_character_db(input_file)
+                # load characters in character db
+                data = self.create_character_db(line)
+
+                # now go through dialogue and create audio
                 for message in data['dialogue']:
                     name = message['speaker']
                     text = message['message']
