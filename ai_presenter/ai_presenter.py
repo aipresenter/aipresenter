@@ -17,15 +17,14 @@ class AIPresenter:
         # calls get_text and puts it into textai
         textai = self.generator.get_text()
         # sends textai to chatgtp config
-        textai.send(self.database.config.ai_config.chatgptconfig.style)
         # creates a message string variable
-        message = ''
+        message = self.database.config.ai_config.chatgptconfig.style
         # goes through each actor
         for key, actor in self.database.actors.items():
             message += f'{actor.name} is a {actor.age} year old' + \
                 f' {actor.gender}, {actor.description}.'
         # sends message to ai in given format
-        textai.send(message)
+        # textai.send(message)
 
         config = self.database.get_config()
         text_ai_file = config.get_ai_config().get_text_ai_filename()
@@ -35,7 +34,8 @@ class AIPresenter:
             for key, scene in self.database.scenes.items():
                 logging.info(f"******** \nWorking on scene: {scene.name} in " +
                              f"{scene.location}")
-                output = self.__get_scene_text(scene, textai)
+                output = self.__get_scene_text(scene, textai, message)
+                message = ''
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
 
@@ -46,9 +46,8 @@ class AIPresenter:
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
 
-    def __get_scene_text(self, scene, textai):
+    def __get_scene_text(self, scene, textai, message=''):
         # go through each scene
-        message = ''
         for dialogue in scene.dialogue:
             actor = dialogue['actor']
             text = dialogue['text']
@@ -56,9 +55,9 @@ class AIPresenter:
         # This message tells ChatGPT to expand on the scene input
         # as well as the format in which to return as JSON
         message += (
-            "Return a json, formatted so they contain Characters, "
-            "and Dialogue. Characters to start, contain their "
-            "name, personality, and emotion. Dialogue contains "
+            "Return a json, formatted so they contain characters, "
+            "and dialogue. characters to start, contain their "
+            "name, personality, and emotion. dialogue contains "
             "speaker, emotion, and message. Make sure to "
             "expand on the given text, adding dialogue, "
             "detail, and emotion."
