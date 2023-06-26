@@ -42,15 +42,14 @@ class VoiceAI:
             for line in input:
                 json_string = line.strip()
                 data = (json.loads(json_string))
-
-        for message in data['dialogue']:
-            name = message['speaker']
-            if name not in self.characters:
-                character_config = VoiceConfig(name,
-                                               self.actors[name].gender,
-                                               self.actors[name].age,
-                                               "American", 1.99,
-                                               self.actors[name].description)
-                self.characters[name] = self.new_actor(character_config)
+                for message in data['dialogue']:
+                    name = message['speaker']
+                    if name not in self.characters:
+                        character_config = VoiceConfig(name,
+                                                    self.actors[name].gender,
+                                                    self.actors[name].age,
+                                                    "American", 1.99,
+                                                    self.actors[name].description)
+                        self.characters[name] = self.new_actor(character_config)
 
         return data
