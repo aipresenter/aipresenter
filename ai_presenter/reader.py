@@ -39,7 +39,8 @@ class Reader:
         return Database(config=self.config,
                         actors=self.actors,
                         scenes=self.scenes,
-                        locations=self.locations)
+                        locations=self.locations,
+                        alldata=self.data)
 
     def print(self):
         yaml.dump(self.data, default_flow_style=False)

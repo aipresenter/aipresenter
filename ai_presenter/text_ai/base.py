@@ -1,4 +1,4 @@
-from ai_presenter.database import Database
+from ai_presenter.database import Database, Scene
 
 
 class TextAi:
@@ -7,5 +7,5 @@ class TextAi:
         self.scenes = db.scenes
         self.locations = db.locations
 
-    def send(self, text) -> str:
+    def generate(self, s: Scene) -> str:
         pass

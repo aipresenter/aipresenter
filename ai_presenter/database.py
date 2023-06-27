@@ -2,14 +2,21 @@ from ai_presenter.config.config import Config
 
 
 class Database:
-    def __init__(self, actors=None, scenes=None, locations=None, config=None):
+    def __init__(
+            self, actors=None, scenes=None,
+            locations=None, config=None, alldata=None
+            ):
         self.actors = actors
         self.scenes = scenes
         self.locations = locations
         self.config = config
+        self.alldata = alldata
 
     def get_config(self) -> Config:
         return self.config
+
+    def get_data(self):
+        return self.alldata
 
 
 class Actor:
@@ -28,6 +35,10 @@ class Scene:
         self.location = data['location']
         self.actors = data['actors']
         self.dialogue = data['dialogue']
+        self.alldata = data
+
+    def to_map(self):
+        return self.alldata
 
 
 class Location:
