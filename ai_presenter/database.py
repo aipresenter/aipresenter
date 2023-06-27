@@ -31,10 +31,10 @@ class Actor:
 
 class Scene:
     def __init__(self, data):
-        self.name = data['name']
+        self.name = data['location']
         self.location = data['location']
-        self.actors = data['actors']
-        self.dialogue = data['dialogue']
+        self.actors = data['characters']
+        self.plot = data['plot']
         self.alldata = data
 
     def to_map(self):

@@ -20,11 +20,23 @@ class TextChatGPT(TextAi):
                 "provided and return it in JSON format."
             },
             {
+                "role": "user",
+                "content": '{"characters":[{"name":"Max Doe",' +
+                '"description":"A charismatic detective",' +
+                '"voice_type":"Baritone","age":35,"height":' +
+                '"6 feet","gender":"male"},{"name":"Joana Smith",' +
+                '"description":"A brilliant scientist","voice_type":' +
+                '"Soprano","age":28,"height":"5 feet 8 inches","gender"' +
+                ':"female"}],"scene":{"location":"Lobby","characters"' +
+                ':["Max Doe","Joana Smith"],"plot":"Max Doe thinks ' +
+                'he is right."}}'
+            },
+            {
                 "role": "assistant",
-                "content": '{"dialogue": [{"speaker": "John", ' +
-                '"message": "Tim, I must say, your taste in ' +
-                'bagels is utterly appalling!"},{"speaker": ' +
-                '"Tim", "message": "John, you are right."}]}'
+                "content": '{"dialogue":[{"speaker":"Max Doe","message"' +
+                ':"Joana, I must say, your taste in bagels is utterly ' +
+                'appalling!"},{"speaker":"Joana Smith","message":' +
+                '"Max, you are right."}]};'
             }
 
         ]
@@ -46,10 +58,13 @@ class TextChatGPT(TextAi):
             messages=self.messages,
         )
         # clear for next time
-        self.messages = []
+        # self.messages = []
         self.user_message = {}
 
         resp = completion.choices[0].message.content
+        self.messages.append(
+            {"role": "assistant", "content": resp}
+        )
         logging.info("Recieved " + resp)
         resp = json_trim(resp)
         try:
