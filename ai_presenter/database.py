@@ -27,6 +27,7 @@ class Actor:
         self.age = data['age']
         self.height = data['height']
         self.gender = data['gender']
+        self.accent = data['accent']
 
 
 class Scene:

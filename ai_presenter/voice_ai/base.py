@@ -31,7 +31,7 @@ class VoiceAI:
         self.locations = db.locations
         self.characters = {}
 
-    def generate(self, input_file, output_file):
+    def generate(self, input_file, output_file, db):
         logging.info("VoiceAI generating")
 
     def new_actor(self, config):
@@ -41,14 +41,24 @@ class VoiceAI:
         json_string = line.strip()
         data = (json.loads(json_string))
 
-        for message in data['characters']:
-            name = message['name']
+        for message in data['dialogue']:
+            name = message['speaker']
             if name not in self.characters:
-                character_config = VoiceConfig(name,
-                                               self.actors[name].gender,
-                                               self.actors[name].age,
-                                               "american", 1.99,
-                                               self.actors[name].description)
-                self.characters[name] = self.new_actor(character_config)
-
+                try:
+                    character_config = VoiceConfig(name,
+                                                   self.actors[name].gender,
+                                                   self.actors[name].age,
+                                                   self.actors[name].accent,
+                                                   1.99,
+                                                   self.actors[name].
+                                                   description)
+                    self.characters[name] = self.new_actor(character_config)
+                except Exception:
+                    character_config = VoiceConfig(name,
+                                                   'male',
+                                                   'middle_aged',
+                                                   "british",
+                                                   1.99,
+                                                   f"This is the {name}")
+                    self.characters[name] = self.new_actor(character_config)
         return data

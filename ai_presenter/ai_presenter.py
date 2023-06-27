@@ -1,6 +1,8 @@
+# import json
+import logging
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
-import logging
+# from ai_presenter.voice_ai.base import VoiceConfig
 
 
 class AIPresenter:
@@ -11,6 +13,7 @@ class AIPresenter:
     def run(self):
         config = self.database.get_config()
         text_ai_file = config.get_ai_config().get_text_ai_filename()
+        voice_ai_file = config.get_ai_config().get_voice_ai_filename()
 
         with open(text_ai_file, 'w') as file:
             textai = self.generator.get_text()
@@ -23,5 +26,8 @@ class AIPresenter:
                 logging.info(f'got back from textai: {output}')
 
         # Generate voice ai
+        # chr_db = {}
+        #  for line in file:
+        #   chr_db
         voiceai = self.generator.get_voice()
-        voiceai.generate('text_ai.txt', 'voice_ai.txt')
+        voiceai.generate(text_ai_file, voice_ai_file)
