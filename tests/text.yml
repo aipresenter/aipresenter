@@ -12,6 +12,7 @@ actors:
     age: middle_aged
     height: 6 feet
     gender: male
+    accent: indian
 
   - name: Jane Smith
     description: A brilliant scientist
@@ -19,6 +20,7 @@ actors:
     age: young
     height: 5 feet 8 inches
     gender: female
+    accent: british
 
   - name: Michael Johnson
     description: A wise mentor
@@ -26,6 +28,7 @@ actors:
     age: old
     height: 6 feet 2 inches
     gender: male
+    accent: american
 
 locations:
   - name: Mountains
@@ -44,7 +47,7 @@ scenes:
     plot:
       - "John and Jane are investigating a murder. They find a bloodied knife hidden under a sandwich"
 
-  - location: Interrogation Room
+  - location: Interrogation room
     characters:
       - John Doe
       - Jane Smith
