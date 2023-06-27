@@ -23,6 +23,5 @@ class AIPresenter:
                 logging.info(f'got back from textai: {output}')
 
         # Generate voice ai
-        voiceai = VoiceAI(self.database)
-        voiceconfig = VoiceConfig()
-        voiceai.generate('text_ai.txt', 'voice_ai.txt', voiceconfig)
+        voiceai = self.generator.get_voice()
+        voiceai.generate('text_ai.txt', 'voice_ai.txt')

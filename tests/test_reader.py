@@ -13,7 +13,8 @@ class TestReader(unittest.TestCase):
         for actor in ['John Doe', 'Jane Smith', 'Michael Johnson']:
             self.assertIn(actor, a)
 
-        for scene in ['Crime Scene', 'Interrogation Room', 'Laboratory']:
+        for scene in ['Cabin', 'Interrogation Room',
+                      'Laboratory', 'Courtroom']:
             self.assertIn(scene, s)
 
         for location in ['Mountains', 'Cabin']:

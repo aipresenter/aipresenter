@@ -1,7 +1,7 @@
 config:
   ai_config:
-    text_ai_filename: text_ai.txt
-    voice_ai_filename: voice_ai.txt
+    text_ai_filename: blah.txt
+    voice_ai_filename: output.txt
     chatgpt_config:
       style: you are a whimsical storyteller
 
@@ -9,21 +9,21 @@ actors:
   - name: John Doe
     description: A charismatic detective
     voice_type: Baritone
-    age: 35
+    age: middle_aged
     height: 6 feet
     gender: male
 
   - name: Jane Smith
     description: A brilliant scientist
     voice_type: Soprano
-    age: 28
+    age: young
     height: 5 feet 8 inches
     gender: female
 
   - name: Michael Johnson
     description: A wise mentor
     voice_type: Bass
-    age: 42
+    age: old
     height: 6 feet 2 inches
     gender: male
 
@@ -37,32 +37,32 @@ locations:
     lighting: Dim
 
 scenes:
-  - name: Crime Scene
-    location: Cabin
-    actors:
+  - location: Cabin
+    characters:
       - John Doe
       - Jane Smith
-    dialogue:
-      - actor: John Doe
-        text: "I need to examine the evidence carefully."
-      - actor: Jane Smith
-        text: "Let's analyze the DNA samples."
+    plot:
+      - "John and Jane are investigating a murder. They find a bloodied knife hidden under a sandwich"
 
-  - name: Interrogation Room
-    location: Police Station
-    actors:
+  - location: Interrogation Room
+    characters:
       - John Doe
-      - Michael Johnson
-    dialogue:
-      - actor: John Doe
-        text: "Tell me everything you know about the suspect."
-      - actor: Michael Johnson
-        text: "I'll use my negotiation skills to get the truth."
-
-  - name: Laboratory
-    location: Cave
-    actors:
       - Jane Smith
-    dialogue:
-      - actor: Jane Smith
-        text: "I believe I've made a groundbreaking discovery."
+      - Micheal Johnson
+    plot:
+      - "Michael is a suspect being interrogated by Jane and John play good cop bad cop."
+
+  - location: Laboratory
+    characters:
+      - John Doe
+      - Jane Smith
+    plot:
+      - "John and Jane take the evidence to the lab and make a breathtaking discovery."
+
+  - location: Courtroom
+    characters:
+      - John Doe
+      - Jane Smith
+      - Micheal Johnson
+    plot:
+      - "John and Jane bring their evidence to court and put the case to rest."

@@ -4,7 +4,7 @@ from ai_presenter.ai_presenter import AIPresenter
 from ai_presenter.reader import Reader
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.voice_ai.base import VoiceAI
-from ai_presenter.database import Database
+from ai_presenter.database import Database, Scene
 from ai_presenter.generators import Generators
 
 
@@ -14,7 +14,7 @@ class TestTextAi(TextAi):
         self.counter = 0
         super().__init__(db)
 
-    def send(self, text) -> str:
+    def generate(self, s: Scene) -> str:
         self.counter += 1
         return self.expected_text
 
@@ -35,7 +35,6 @@ class TestAiPresenter(unittest.TestCase):
     def testAiPresenter(self):
         # this variable is used to counteract the calls made
         # during run setup to text_ai not counting scenes
-        setup_calls = 2
 
         reader = Reader('tests/text.yml')
         # actors = reader.get_actors()
@@ -51,7 +50,7 @@ class TestAiPresenter(unittest.TestCase):
         # self.assertFalse(os.path.exists('text_ai.txt'))
         presenter.run()
         self.assertTrue(os.path.exists('text_ai.txt'))
-        self.assertEqual(text_tester.counter, len(scenes) + setup_calls)
+        self.assertEqual(text_tester.counter, len(scenes))
         with open('text_ai.txt', 'r') as file:
             for line in file:
                 self.assertEqual(expected, line.strip())
