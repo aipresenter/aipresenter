@@ -16,28 +16,38 @@ class TextFake(TextAi):
         dialogue = {
             "characters": [
                 {
-                    "name": "Don Luis",
+                    "name": "John Doe",
                     "personality": "authoritative and stubborn",
                     "emotion": "stubborn"
                 },
                 {
-                    "name": "Immanuel",
+                    "name": "Jane Smith",
                     "personality": "boisterous and foolheaded",
                     "emotion": "cheerful"
+                },
+                {
+                    "name": "Michael Johnson",
+                    "personality": "determined and informative",
+                    "emotion": "calm"
                 }
             ],
             "dialogue": [
                 {
-                    "speaker": "Don Luis",
+                    "speaker": "John Doe",
                     "message": "Immanuel, I must say, your taste in " +
                     "bagels is utterly appalling!",
                     "emotion": "indignant"
                 },
                 {
-                    "speaker": "Immanuel",
+                    "speaker": "Jane Smith",
                     "message": "Oh, Don Luis, my friend, you're " +
                     "missing out on the joy of adventurous flavors!",
                     "emotion": "enthusiastic"
+                },
+                {
+                    "speaker": "Michael Johnson",
+                    "message": "The argument continues heatedly",
+                    "emotion": "descriptive"
                 }
             ]
         }

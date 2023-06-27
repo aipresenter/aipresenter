@@ -1,6 +1,7 @@
 from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
+from elevenlabs import Voice, Iterator
 import logging
 
 
@@ -9,15 +10,28 @@ class VoiceAIActorFake(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
-    def says(self, message, emotion, filename):
+    def says(self, message, emotion) -> (bytes | Iterator[bytes]):
         # .says takes the message and generates audio from that message
         # this audio gets saved to a file
         # personally don't think says needs a file passed to it bc
         # note: for the real voiceaiactor class, the elevenlabs generate
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
-        logging.info(f'{self.config.name} says {message} in a {emotion} way')
-        # return message
+        logging.info(f'VoiceAIActorFake: {self.name} ' +
+                     f'says {message} in a {emotion} way')
+
+        audio = f'name: {self.name}\ngender: {self.gender}\n' + \
+            f'age: {self.age}\naccent: {self.accent}\n' + \
+            f'accent strength: {self.accent_strength}\n' + \
+                f'description: {self.description}\n' + \
+                f'message: {message}\n\n'
+        return audio
+
+    def __get_voice(self, emotion) -> Voice:
+        logging.info(f'I am {self.name}. I am a {self.age} year old ' +
+                     f'{self.gender} with a {self.accent} accent. I am ' +
+                     f'currently speaking in a {emotion} tone because I' +
+                     f' am {emotion}')
 
 
 class VoiceAIFake(VoiceAI):
@@ -37,18 +51,24 @@ class VoiceAIFake(VoiceAI):
     # ai does its thingy and returns voice data
     # output file opened and voice data is written to output_file
     # this is saved into output file
-    def generate(self, input_file: str, output_file: str, c: VoiceConfig):
-        logging.info('Setting voice configuration')
-
+    def generate(self, input_file: str, output_file: str):
         logging.info(f'VoiceAIFake: Opening input file: {input_file} and ' +
-                     'extracting send info')
-        with open(input_file, 'r') as input:
-            text = input.read()
+                     'extracting scene info')
+
+        audio = ''
+        with open(input_file, 'r') as file:
+            for line in file:
+                data = self.create_character_db(line)
+                for message in data['dialogue']:
+                    name = message['speaker']
+                    text = message['message']
+                    emotion = message['emotion']
+                    logging.info('VoiceAIFake: Stitching together audio')
+                    audio += self.characters[name].says(text, emotion)
 
         logging.info('VoiceAIFake: Generating audio file')
-
         with open(output_file, 'w') as out:
-            out.write(text)
+            out.write(audio)
 
         logging.info(f'VoiceAIFake: Closing input file: {input_file}')
         logging.info(f"VoiceAIFake: generated audio found in {output_file}")
@@ -58,3 +78,5 @@ class VoiceAIFake(VoiceAI):
     # together and saved to given file
     # generate wouldn't need voice config passed in anymore because says
     # method in voiceaiactor already has it
+    def __create_character_db(self, input_file: str):
+        return super().__create_character_db(input_file)

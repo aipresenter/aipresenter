@@ -1,7 +1,6 @@
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
 import logging
-from ai_presenter.voice_ai.base import VoiceAI, VoiceConfig
 
 
 class AIPresenter:
@@ -24,7 +23,7 @@ class AIPresenter:
         # goes through each actor
         for key, actor in self.database.actors.items():
             message += f'{actor.name} is a {actor.age} year old' + \
-                f' {actor.gender}, {actor.description}. '
+                f' {actor.gender}, {actor.description}.'
         # sends message to ai in given format
         textai.send(message)
 
@@ -41,9 +40,11 @@ class AIPresenter:
                 logging.info(f'got back from textai: {output}')
 
     def __run_voice_ai(self):
-        voiceai = VoiceAI(self.database)
-        voiceconfig = VoiceConfig()
-        voiceai.generate('text_ai.txt', 'voice_ai.txt', voiceconfig)
+        config = self.database.get_config()
+        text_ai_file = config.get_ai_config().get_text_ai_filename()
+        voice_ai_file = config.get_ai_config().get_voice_ai_filename()
+        voiceai = self.generator.get_voice()
+        voiceai.generate(text_ai_file, voice_ai_file)
 
     def __get_scene_text(self, scene, textai):
         # go through each scene
