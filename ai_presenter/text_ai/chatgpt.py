@@ -8,7 +8,8 @@ from ai_presenter.tools.json_trim import json_trim
 # import ai_presenter.config.env_vars
 
 
-# in the __init__ for this class, add openai.api_key = config.get_ai_config().get_chatgpt_api_key()
+# in the __init__ for this class,
+# add openai.api_key = config.get_ai_config().get_chatgpt_api_key()
 class TextChatGPT(TextAi):
     def __init__(self, db: Database):
         self.db = db
