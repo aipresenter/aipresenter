@@ -1,7 +1,7 @@
 config:
   ai_config:
-    text_ai_filename: blah.txt
-    voice_ai_filename: output.wav
+    text_ai_filename: text_ai.txt
+    voice_ai_filename: voice_ai.wav
     chatgpt_config:
       style: you are a whimsical storyteller
 
@@ -47,7 +47,7 @@ scenes:
     plot:
       - "John and Jane are investigating a murder. They find a bloodied knife hidden under a sandwich"
 
-  - location: Interrogation room
+  - location: Interrogation Room
     characters:
       - John Doe
       - Jane Smith

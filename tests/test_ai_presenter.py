@@ -33,13 +33,13 @@ class TestVoiceAI(VoiceAI):
 
 class TestAiPresenter(unittest.TestCase):
     def testAiPresenter(self):
-        # this variable is used to counteract the calls made
-        # during run setup to text_ai not counting scenes
+        '''
+        this test is using fake generator classes to copy
+        information from one file to another to compare them
+        '''
 
         reader = Reader('tests/text.yml')
-        # actors = reader.get_actors()
         scenes = reader.get_scenes()
-        # loc = reader.get_locations()
         db = reader.get_db()
         expected = 'HELLO WORLD!'
         text_tester = TestTextAi(db, expected)
@@ -47,16 +47,18 @@ class TestAiPresenter(unittest.TestCase):
         gen = Generators(text_tester, voice_tester, None)
 
         presenter = AIPresenter(db, gen)
-        # self.assertFalse(os.path.exists('text_ai.txt'))
         presenter.run()
-        self.assertTrue(os.path.exists('text_ai.txt'))
+        text_ai_file = db.get_config().get_ai_config().get_text_ai_filename()
+        voice_ai_file = db.get_config().get_ai_config().get_voice_ai_filename()
+
+        self.assertTrue(os.path.exists(text_ai_file))
         self.assertEqual(text_tester.counter, len(scenes))
-        with open('text_ai.txt', 'r') as file:
+        with open(text_ai_file, 'r') as file:
             for line in file:
                 self.assertEqual(expected, line.strip())
 
-        self.assertTrue(os.path.exists('text_ai.txt'))
-        with open('voice_ai.txt', 'r') as file:
+        self.assertTrue(os.path.exists(voice_ai_file))
+        with open(voice_ai_file, 'r') as file:
             for line in file:
                 self.assertEqual(expected, line.strip())
 
