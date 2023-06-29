@@ -36,7 +36,7 @@ class AIPresenter:
         voiceai.generate(text_ai_file, voice_ai_file)
 
 
-    def clear_voices(self):
+    def __clear_voices(self):
         file = open("test_clear_voices.txt", "w")
         
         config = self.database.get_config()
