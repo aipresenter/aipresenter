@@ -25,7 +25,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 if args.script == '':
-    print("Missing user")
+    print("Missing script file")
     sys.exit(1)
 
 
