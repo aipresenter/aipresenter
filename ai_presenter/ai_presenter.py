@@ -35,13 +35,12 @@ class AIPresenter:
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
 
-
     def __clear_voices(self):
-        file = open("test_clear_voices.txt", "w")
-        
+        # file = open("test_clear_voices.txt", "w")
+
         config = self.database.get_config()
         key = config.get_ai_config().get_elevenlabs_api_key()
-        
+
         set_api_key(key)
         voices = Voices.from_api()
         print(voices)
@@ -51,12 +50,11 @@ class AIPresenter:
                 url = "https://api.elevenlabs.io/v1/voices/" + id_num
 
                 headers = {
-                "Accept": "application/json",
-                "xi-api-key": key
+                    "Accept": "application/json",
+                    "xi-api-key": key
                 }
 
+                requests.delete(url, headers=headers)
+                logging.info("Cleared voice")
 
-
-                response = requests.delete(url, headers=headers)
-
-                print(response.text, file=file)
+        logging.info("Successfully cleared all voices")
