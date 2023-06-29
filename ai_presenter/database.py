@@ -1,12 +1,22 @@
+from ai_presenter.config.config import Config
+
+
 class Database:
-    def __init__(self, actors=None, scenes=None, locations=None, config=None):
+    def __init__(
+            self, actors=None, scenes=None,
+            locations=None, config=None, alldata=None
+            ):
         self.actors = actors
         self.scenes = scenes
         self.locations = locations
         self.config = config
+        self.alldata = alldata
 
-    def get_config(self):
+    def get_config(self) -> Config:
         return self.config
+
+    def get_data(self):
+        return self.alldata
 
 
 class Actor:
@@ -17,14 +27,19 @@ class Actor:
         self.age = data['age']
         self.height = data['height']
         self.gender = data['gender']
+        self.accent = data['accent']
 
 
 class Scene:
     def __init__(self, data):
-        self.name = data['name']
+        self.name = data['location']
         self.location = data['location']
-        self.actors = data['actors']
-        self.dialogue = data['dialogue']
+        self.actors = data['characters']
+        self.plot = data['plot']
+        self.alldata = data
+
+    def to_map(self):
+        return self.alldata
 
 
 class Location:

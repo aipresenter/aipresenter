@@ -2,7 +2,9 @@ from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
 from elevenlabs import generate, save, Iterator, VoiceDesign, Voice
+from elevenlabs import set_api_key
 import logging
+import os
 
 
 class VoiceAIActorElevenLabs(VoiceAIActor):
@@ -27,8 +29,8 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
     # note: for the real voiceaiactor class, the elevenlabs generate
     # methods return raw data called audio which can be manipulated before
     # saving to a file(ie. concatenation)
-    def says(self, message, emotion) -> (bytes | Iterator[bytes]):
-        logging.info(f'{self.name} says {message} in a {emotion} way')
+    def says(self, message) -> (bytes | Iterator[bytes]):
+        logging.info(f'{self.name} says {message}')
         audio = generate(text=message, model="eleven_monolingual_v1",
                          voice=self.voice)
         return audio
@@ -52,6 +54,8 @@ class ElevenLabs(VoiceAI):
 
     def generate(self, input_file: str, output_file: str):
         logging.info('ElevenLabs: Generating audio file')
+        key = os.getenv('ELEVENLABS_APIKEY')
+        set_api_key(key)
         # need suggestions as to format of json
         # as well as parsing it
         audio = bytes()
@@ -64,8 +68,7 @@ class ElevenLabs(VoiceAI):
                 for message in data['dialogue']:
                     name = message['speaker']
                     text = message['message']
-                    emotion = message['emotion']
                     logging.info('ElevenLabs: Stitching together audio')
-                    audio += self.characters[name].says(text, emotion)
+                    audio += self.characters[name].says(text)
         logging.info(f"ElevenLabs: Audio can be found in {output_file}")
         save(audio, output_file)
