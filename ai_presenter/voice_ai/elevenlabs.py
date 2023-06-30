@@ -61,6 +61,7 @@ class ElevenLabs(VoiceAI):
 
     def new_actor(self, config) -> VoiceAIActor:
         if config.name == 'narrator':
+            # if character is narrator, give this actor narrator voice
             voice = self.__find_voice(config.name)
             return VoiceAIDefaultActorElevenLabs(
                 config, voice)
