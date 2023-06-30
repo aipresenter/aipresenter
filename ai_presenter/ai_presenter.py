@@ -1,11 +1,9 @@
 # import json
 import logging
-import requests
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
 from elevenlabs.api import Voices
 from elevenlabs import set_api_key
-# from ai_presenter.voice_ai.base import VoiceConfig
 
 
 class AIPresenter:
@@ -14,6 +12,7 @@ class AIPresenter:
         self.generator = g
 
     def run(self):
+        self.__clear_voices()
         config = self.database.get_config()
         text_ai_file = config.get_ai_config().get_text_ai_filename()
         voice_ai_file = config.get_ai_config().get_voice_ai_filename()
@@ -35,6 +34,7 @@ class AIPresenter:
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
 
+# potentially might move to VoiceAI class, but stays here for now
     def __clear_voices(self):
         # file = open("test_clear_voices.txt", "w")
 
@@ -43,18 +43,13 @@ class AIPresenter:
 
         set_api_key(key)
         voices = Voices.from_api()
-        print(voices)
         for voice in voices:
-            if voice.category != 'premade':
-                id_num = voice.voice_id
-                url = "https://api.elevenlabs.io/v1/voices/" + id_num
-
-                headers = {
-                    "Accept": "application/json",
-                    "xi-api-key": key
-                }
-
-                requests.delete(url, headers=headers)
+            # conditions true if voice is generated and not narrator
+            if voice.category == 'generated' and voice.name != 'narrator':
+                # delete generated voices that aren't narrator
+                # this keeps voices list for each run clean because it is
+                # called in run before work is done
+                voice.delete()
                 logging.info("Cleared voice")
 
         logging.info("Successfully cleared all voices")

@@ -35,7 +35,7 @@ class VoiceAI:
     def generate(self, input_file, output_file, db):
         logging.info("VoiceAI generating")
 
-    def new_actor(self, config):
+    def new_actor(self, config) -> VoiceAIActor:
         logging.info("New actor created")
 
     def create_character_db(self, line: str):
