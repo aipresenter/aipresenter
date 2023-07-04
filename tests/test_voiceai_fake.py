@@ -14,7 +14,7 @@ class TestVoiceAIFake(unittest.TestCase):
         voice_fake = VoiceAIFake(db)
         text_fake = TextFake(db)
         with open(input, 'w') as file:
-            file.write(text_fake.send("fake text"))
+            file.write(text_fake.generate("fake text"))
 
         voice_fake.generate(input, output)
 

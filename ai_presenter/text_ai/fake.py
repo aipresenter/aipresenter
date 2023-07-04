@@ -8,10 +8,7 @@ class TextFake(TextAi):
     def __init__(self, db: Database):
         super().__init__(db)
 
-    def generate(self):
-        pass
-
-    def send(self, text) -> str:
+    def generate(self, text) -> str:
         logging.info(f"textfake: Sending {text}")
         dialogue = {
             "characters": [

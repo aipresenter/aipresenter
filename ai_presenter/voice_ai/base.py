@@ -45,9 +45,10 @@ class VoiceAI:
             name = message['speaker']
             if name not in self.characters:
                 try:
+                    age = self.__age_converter(self.actors[name].age)
                     character_config = VoiceConfig(name,
                                                    self.actors[name].gender,
-                                                   self.actors[name].age,
+                                                   age,
                                                    self.actors[name].accent,
                                                    1.99,
                                                    self.actors[name].
@@ -62,3 +63,11 @@ class VoiceAI:
                                                    f"This is the {name}")
                     self.characters[name] = self.new_actor(character_config)
         return data
+
+    def __age_converter(self, age) -> str:
+        if age in range(34):
+            return 'young'
+        elif age in range(35, 50):
+            return 'middle_aged'
+        else:
+            return 'old'

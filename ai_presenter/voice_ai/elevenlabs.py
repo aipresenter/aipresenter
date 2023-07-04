@@ -55,10 +55,7 @@ class ElevenLabs(VoiceAI):
 
     def generate(self, input_file: str, output_file: str):
         logging.info('ElevenLabs: Generating audio file')
-        key = os.getenv('ELEVENLABS_APIKEY')
-        set_api_key(key)
-        # need suggestions as to format of json
-        # as well as parsing it
+
         audio = bytes()
         with open(input_file, 'r') as file:
             for line in file:
