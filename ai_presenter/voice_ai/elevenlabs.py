@@ -4,7 +4,6 @@ from ai_presenter.config.voice import VoiceConfig
 from elevenlabs import generate, save, Iterator, VoiceDesign, Voice
 from elevenlabs import set_api_key
 import logging
-import os
 
 
 class VoiceAIActorElevenLabs(VoiceAIActor):
