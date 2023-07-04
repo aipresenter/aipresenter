@@ -39,11 +39,13 @@ class VoiceAI:
 
     def create_character_db(self, line: str):
         json_string = line.strip()
-        data = (json.loads(json_string))
+        data = json.loads(json_string)
 
         for message in data['dialogue']:
             name = message['speaker']
+            
             if name not in self.characters:
+                logging.info(f"creating character {name}")
                 try:
                     age = self.__age_converter(self.actors[name].age)
                     character_config = VoiceConfig(name,
