@@ -1,5 +1,6 @@
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
+from ai_presenter.tools.age_converter import age_converter
 from elevenlabs import Iterator, Voice
 import json
 import logging
@@ -47,7 +48,7 @@ class VoiceAI:
             if name not in self.characters:
                 logging.info(f"creating character {name}")
                 try:
-                    age = self.__age_converter(self.actors[name].age)
+                    age = age_converter(self.actors[name].age)
                     character_config = VoiceConfig(name,
                                                    self.actors[name].gender,
                                                    age,
@@ -65,11 +66,3 @@ class VoiceAI:
                                                    f"This is the {name}")
                     self.characters[name] = self.new_actor(character_config)
         return data
-
-    def __age_converter(self, age) -> str:
-        if age in range(34):
-            return 'young'
-        elif age in range(35, 50):
-            return 'middle_aged'
-        else:
-            return 'old'
