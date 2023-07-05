@@ -60,12 +60,13 @@ class ElevenLabs(VoiceAI):
         set_api_key(db.get_config().get_ai_config().get_elevenlabs_api_key())
 
     def new_actor(self, config) -> VoiceAIActor:
-        if config.name == 'narrator':
-            # if character is narrator, give this actor narrator voice
-            voice = self.__find_voice(config.name)
-            return VoiceAIDefaultActorElevenLabs(
-                config, voice)
-        return VoiceAIActorElevenLabs(config)
+        voice = self.__find_voice(config.name)
+        # if voice doesn't exist generate voice
+        if voice is None:
+            return VoiceAIActorElevenLabs(config)
+        # if voice exits, use that voice
+        return VoiceAIDefaultActorElevenLabs(
+            config, voice)
 
     # make narrator actor
     # open file and create a new actor for each character
@@ -97,8 +98,7 @@ class ElevenLabs(VoiceAI):
     def __find_voice(self, name) -> Voice:
         voices = Voices.from_api()
 
-        # need ideas on what to do if narrator character isn't found
-        # just for control of code flow
         for voice in voices:
             if voice.name == name:
                 return voice
+        return None
