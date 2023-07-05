@@ -1,5 +1,6 @@
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
+from ai_presenter.tools.age_converter import age_converter
 from elevenlabs import Iterator, Voice
 import json
 import logging
@@ -39,15 +40,18 @@ class VoiceAI:
 
     def create_character_db(self, line: str):
         json_string = line.strip()
-        data = (json.loads(json_string))
+        data = json.loads(json_string)
 
         for message in data['dialogue']:
             name = message['speaker']
+
             if name not in self.characters:
+                logging.info(f"creating character {name}")
                 try:
+                    age = age_converter(self.actors[name].age)
                     character_config = VoiceConfig(name,
                                                    self.actors[name].gender,
-                                                   self.actors[name].age,
+                                                   age,
                                                    self.actors[name].accent,
                                                    1.99,
                                                    self.actors[name].
