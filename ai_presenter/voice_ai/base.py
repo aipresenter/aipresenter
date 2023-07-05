@@ -66,3 +66,6 @@ class VoiceAI:
                                                    f"This is the {name}")
                     self.characters[name] = self.new_actor(character_config)
         return data
+
+    def get_new_voices(self) -> list[Voice]:
+        return []

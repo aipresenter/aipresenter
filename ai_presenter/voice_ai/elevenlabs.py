@@ -53,17 +53,25 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
                          voice=self.voice)
         return audio
 
+    def __get_voice(self) -> Voice:
+        return self.voice
+
 
 class ElevenLabs(VoiceAI):
     def __init__(self, db: Database):
         super().__init__(db)
         set_api_key(db.get_config().get_ai_config().get_elevenlabs_api_key())
+        # list that keeps track of new voices created in this run
+        self.new_voices = []
 
     def new_actor(self, config) -> VoiceAIActor:
         voice = self.__find_voice(config.name)
         # if voice doesn't exist generate voice
         if voice is None:
-            return VoiceAIActorElevenLabs(config)
+            # save each new actor's voice that gets generated into a list
+            actor = VoiceAIActorElevenLabs(config)
+            self.new_voices.append(actor.__get_voice())
+            return actor
         # if voice exits, use that voice
         return VoiceAIDefaultActorElevenLabs(
             config, voice)
@@ -102,3 +110,6 @@ class ElevenLabs(VoiceAI):
             if voice.name == name:
                 return voice
         return None
+
+    def get_new_voices(self) -> list[Voice]:
+        return self.new_voices
