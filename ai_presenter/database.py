@@ -40,10 +40,3 @@ class Scene:
 
     def to_map(self):
         return self.alldata
-
-
-class Location:
-    def __init__(self, data):
-        self.name = data['name']
-        self.type = data['type']
-        self.lighting = data['lighting']

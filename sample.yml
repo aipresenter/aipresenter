@@ -30,24 +30,13 @@ actors:
     gender: male
     accent: american
 
-locations:
-  - name: Mountains
-    type: outside
-    lighting: Daylight
-
-  - name: Cabin
-    type: inside
-    lighting: Dim
-
 scenes:
-  - location: Cabin
     characters:
       - John Doe
       - Jane Smith
     plot:
       - "John and Jane are investigating a murder. They find a bloodied knife hidden under a sandwich"
 
-  - location: Interrogation room
     characters:
       - John Doe
       - Jane Smith
@@ -55,14 +44,12 @@ scenes:
     plot:
       - "Michael is a suspect being interrogated by Jane and John play good cop bad cop."
 
-  - location: Laboratory
     characters:
       - John Doe
       - Jane Smith
     plot:
       - "John and Jane take the evidence to the lab and make a breathtaking discovery."
 
-  - location: Courtroom
     characters:
       - John Doe
       - Jane Smith

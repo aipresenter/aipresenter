@@ -1,5 +1,5 @@
 import yaml
-from ai_presenter.database import Database, Actor, Scene, Location
+from ai_presenter.database import Database, Actor, Scene
 from ai_presenter.config.config import Config
 
 
@@ -9,7 +9,6 @@ class Reader:
         self.data = {}
         self.actors = {}
         self.scenes = {}
-        self.locations = {}
         with open(self.file_path, 'r') as file:
             self.data = yaml.safe_load(file)
         self.config = Config(self.data['config'])
@@ -19,18 +18,12 @@ class Reader:
         for scene in self.data['scenes']:
             s = Scene(scene)
             self.scenes[s.name] = s
-        for location in self.data['locations']:
-            loc = Location(location)
-            self.locations[loc.name] = loc
 
     def get_actors(self):
         return self.actors
 
     def get_scenes(self):
         return self.scenes
-
-    def get_locations(self):
-        return self.locations
 
     def _get_data_element(self, element):
         return self.data[element]
@@ -39,7 +32,6 @@ class Reader:
         return Database(config=self.config,
                         actors=self.actors,
                         scenes=self.scenes,
-                        locations=self.locations,
                         alldata=self.data)
 
     def print(self):
