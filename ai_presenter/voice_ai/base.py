@@ -43,7 +43,7 @@ class VoiceAI:
 
         for message in data['dialogue']:
             name = message['speaker']
-            
+
             if name not in self.characters:
                 logging.info(f"creating character {name}")
                 try:
