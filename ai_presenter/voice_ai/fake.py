@@ -10,7 +10,7 @@ class VoiceAIActorFake(VoiceAIActor):
     def __init__(self, config: VoiceConfig):
         super().__init__(config)
 
-    def says(self, message, emotion) -> (bytes | Iterator[bytes]):
+    def says(self, message) -> (bytes | Iterator[bytes]):
         # .says takes the message and generates audio from that message
         # this audio gets saved to a file
         # personally don't think says needs a file passed to it bc
@@ -18,7 +18,7 @@ class VoiceAIActorFake(VoiceAIActor):
         # methods return raw data called audio which can be manipulated before
         # saving to a file(ie. concatenation)
         logging.info(f'VoiceAIActorFake: {self.name} ' +
-                     f'says {message} in a {emotion} way')
+                     f'says {message}')
 
         audio = f'name: {self.name}\ngender: {self.gender}\n' + \
             f'age: {self.age}\naccent: {self.accent}\n' + \
@@ -27,11 +27,9 @@ class VoiceAIActorFake(VoiceAIActor):
                 f'message: {message}\n\n'
         return audio
 
-    def __get_voice(self, emotion) -> Voice:
+    def __get_voice(self) -> Voice:
         logging.info(f'I am {self.name}. I am a {self.age} year old ' +
-                     f'{self.gender} with a {self.accent} accent. I am ' +
-                     f'currently speaking in a {emotion} tone because I' +
-                     f' am {emotion}')
+                     f'{self.gender} with a {self.accent} accent.')
 
 
 class VoiceAIFake(VoiceAI):
@@ -62,9 +60,8 @@ class VoiceAIFake(VoiceAI):
                 for message in data['dialogue']:
                     name = message['speaker']
                     text = message['message']
-                    emotion = message['emotion']
                     logging.info('VoiceAIFake: Stitching together audio')
-                    audio += self.characters[name].says(text, emotion)
+                    audio += self.characters[name].says(text)
 
         logging.info('VoiceAIFake: Generating audio file')
         with open(output_file, 'w') as out:

@@ -11,7 +11,7 @@ class TestVoiceAIActorFake(unittest.TestCase):
                              Accent.american, 1.99, description)
         actor = VoiceAIActorFake(config)
 
-        output = actor.says("Hi, I'm an actor", "Determined")
+        output = actor.says("Hi, I'm an actor")
 
         self.assertIn('name', output)
         self.assertIn('gender', output)
