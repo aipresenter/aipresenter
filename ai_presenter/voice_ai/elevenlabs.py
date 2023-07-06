@@ -53,7 +53,7 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
                          voice=self.voice)
         return audio
 
-    def __get_voice(self) -> Voice:
+    def get_voice(self) -> Voice:
         return self.voice
 
 
@@ -70,7 +70,7 @@ class ElevenLabs(VoiceAI):
         if voice is None:
             # save each new actor's voice that gets generated into a list
             actor = VoiceAIActorElevenLabs(config)
-            self.new_voices.append(actor.__get_voice())
+            self.new_voices.append(actor.get_voice())
             return actor
         # if voice exits, use that voice
         return VoiceAIDefaultActorElevenLabs(
