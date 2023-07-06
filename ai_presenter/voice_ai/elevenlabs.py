@@ -38,6 +38,7 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
 class ElevenLabs(VoiceAI):
     def __init__(self, db: Database):
         super().__init__(db)
+        logging.info(db.get_config().get_ai_config().get_elevenlabs_api_key())
         set_api_key(db.get_config().get_ai_config().get_elevenlabs_api_key())
 
     def new_actor(self, config):
