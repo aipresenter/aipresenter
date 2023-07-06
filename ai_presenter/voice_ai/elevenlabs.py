@@ -102,6 +102,7 @@ class ElevenLabs(VoiceAI):
                     audio += self.characters[name].says(text)
         logging.info(f"ElevenLabs: Audio can be found in {output_file}")
         save(audio, output_file)
+        self.__clear_voices()
 
     def __find_voice(self, name) -> Voice:
         voices = Voices.from_api()
@@ -113,3 +114,14 @@ class ElevenLabs(VoiceAI):
 
     def get_new_voices(self) -> list[Voice]:
         return self.new_voices
+
+    def __clear_voices(self):
+        # this method gets the new voices created during this iteration of
+        # AI Presenter, and the for loop deletes each of these voices
+        # but not voices that were present before this run of the program
+        voices = self.get_new_voices()
+        for voice in voices:
+            voice.delete()
+            logging.info("Cleared voice")
+
+        logging.info("Successfully cleared all voices")
