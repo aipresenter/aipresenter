@@ -2,7 +2,6 @@
 import logging
 from ai_presenter.database import Database
 from ai_presenter.generators import Generators
-from elevenlabs import set_api_key
 
 
 class AIPresenter:
@@ -31,4 +30,3 @@ class AIPresenter:
         #   chr_db
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
-    
