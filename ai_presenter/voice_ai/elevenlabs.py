@@ -9,14 +9,10 @@ import logging
 
 class VoiceAIDefaultActorElevenLabs(VoiceAIActor):
     def __init__(self, config: VoiceConfig, voice: Voice):
-        # this is for the narrator
         super().__init__(config)
+        # this is for a premade character
         self.voice = voice
 
-    # .says takes the message and generates audio from that message
-    # note: for the real voiceaiactor class, the elevenlabs generate
-    # methods return raw data called audio which can be manipulated before
-    # saving to a file(ie. concatenation)
     def says(self, message) -> (bytes | Iterator[bytes]):
         logging.info(f'{self.name} says {message}')
         audio = generate(text=message, model="eleven_monolingual_v1",
@@ -43,10 +39,6 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
 
         self.voice = Voice.from_design(self.voice_design)
 
-    # .says takes the message and generates audio from that message
-    # note: for the real voiceaiactor class, the elevenlabs generate
-    # methods return raw data called audio which can be manipulated before
-    # saving to a file(ie. concatenation)
     def says(self, message) -> (bytes | Iterator[bytes]):
         logging.info(f'{self.name} says {message}')
         audio = generate(text=message, model="eleven_monolingual_v1",
@@ -67,13 +59,13 @@ class ElevenLabs(VoiceAI):
 
     def new_actor(self, config: VoiceConfig) -> VoiceAIActor:
         voice = self.__find_voice(config.name)
-        # if voice doesn't exist generate voice
         if voice is not None:
             # if voice exits, use that voice
             return VoiceAIDefaultActorElevenLabs(config, voice)
 
-        # save each new actor's voice that gets generated into a list
+        # if voice doesn't exist generate voice
         actor = VoiceAIActorElevenLabs(config)
+        # save each new actor's voice that gets generated into a list
         self.generated_voices.append(actor.get_voice())
         return actor
 
@@ -106,7 +98,7 @@ class ElevenLabs(VoiceAI):
         return self.generated_voices
 
     def __clear_voices(self):
-        # this method gets the new voices created during this iteration of
+        # gets the generated voices created during this iteration of
         # AI Presenter, and the for loop deletes each of these voices
         # but not voices that were present before this run of the program
         voices = self.get_generated_voices()

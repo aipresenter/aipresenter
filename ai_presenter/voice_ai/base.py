@@ -15,6 +15,10 @@ class VoiceAIActor:
         self.accent = config.accent
         self.accent_strength = config.accent_strength
 
+    # .says takes the message and generates audio from that message
+    # note: for the real voiceaiactor class, the elevenlabs generate
+    # methods return raw data called audio which can be manipulated before
+    # saving to a file(ie. concatenation)
     def says(self, message, emotion) -> (bytes | Iterator[bytes]):
         logging.info(f'{self.config.name} says {message} in a {emotion} way')
 

@@ -24,9 +24,5 @@ class AIPresenter:
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
 
-        # Generate voice ai
-        # chr_db = {}
-        #  for line in file:
-        #   chr_db
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
