@@ -32,12 +32,15 @@ parser.add_argument(
     '--voiceai', dest='voiceai', default='fake',
     help='Use elevenlabs or fake'
 )
+parser.add_argument(
+    '--debug', dest='debug', default=False,
+    help='Debugging log level'
+)
 args = parser.parse_args()
 
 if args.script == '':
     print("Missing script file")
     sys.exit(1)
-
 
 valid_text_options = ['chatgpt', 'fake']
 if args.textai not in valid_text_options:
@@ -53,7 +56,11 @@ if args.voiceai not in valid_voice_options:
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
     logging.info("Program starting")
     reader = Reader(args.script)
     db = reader.get_db()
