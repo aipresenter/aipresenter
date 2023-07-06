@@ -31,6 +31,6 @@ class AIConfig:
 
     def get_chatgpt_api_key(self) -> str:
         if CHATGPT_APIKEY is None or CHATGPT_APIKEY == '':
-            raise Exception("Elevenlabs api key missing." +
+            raise Exception("Chatgpt api key missing." +
                             " Use envar CHATGPT_APIKEY")
         return CHATGPT_APIKEY
