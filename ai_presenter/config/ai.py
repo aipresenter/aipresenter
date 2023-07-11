@@ -17,6 +17,9 @@ class AIConfig:
 
         self.chatgptconfig = ChatGPTConfig(data['chatgpt_config'])
 
+    def get_chatgpt_config(self) -> ChatGPTConfig:
+        return self.chatgptconfig
+
     def get_text_ai_filename(self) -> str:
         return self.text_ai_filename
 
