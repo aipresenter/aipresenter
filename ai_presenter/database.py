@@ -1,3 +1,4 @@
+import logging
 from ai_presenter.config.config import Config
 
 
@@ -28,6 +29,7 @@ class Actor:
         self.height = data['height']
         self.gender = data['gender']
         self.accent = data['accent']
+        logging.info(f'actor: name:{self.name} gender:{self.gender}')
 
 
 class Scene:
@@ -37,6 +39,7 @@ class Scene:
         self.actors = data['characters']
         self.plot = data['plot']
         self.alldata = data
+        logging.info(f'scene: name:{self.name} location:{self.location}')
 
     def to_map(self):
         return self.alldata
@@ -47,3 +50,4 @@ class Location:
         self.name = data['name']
         self.type = data['type']
         self.lighting = data['lighting']
+        logging.info(f'location: name:{self.name} type:{self.type}')

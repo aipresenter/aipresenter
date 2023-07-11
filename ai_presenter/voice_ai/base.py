@@ -15,6 +15,10 @@ class VoiceAIActor:
         self.accent = config.accent
         self.accent_strength = config.accent_strength
 
+    # .says takes the message and generates audio from that message
+    # note: for the real voiceaiactor class, the elevenlabs generate
+    # methods return raw data called audio which can be manipulated before
+    # saving to a file(ie. concatenation)
     def says(self, message, emotion) -> (bytes | Iterator[bytes]):
         logging.info(f'{self.config.name} says {message} in a {emotion} way')
 
@@ -35,7 +39,7 @@ class VoiceAI:
     def generate(self, input_file, output_file, db):
         logging.info("VoiceAI generating")
 
-    def new_actor(self, config):
+    def new_actor(self, config) -> VoiceAIActor:
         logging.info("New actor created")
 
     def create_character_db(self, line: str):
@@ -66,3 +70,6 @@ class VoiceAI:
                                                    f"This is the {name}")
                     self.characters[name] = self.new_actor(character_config)
         return data
+
+    def get_new_voices(self) -> list[Voice]:
+        return []
