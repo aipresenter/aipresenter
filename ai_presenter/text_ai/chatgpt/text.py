@@ -1,10 +1,9 @@
 import json
-import os
-import openai
 import logging
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database, Scene
 from ai_presenter.tools.json_trim import json_trim
+from ai_presenter.text_ai.chatgpt.chatgpt import ChatGPT
 # import ai_presenter.config.env_vars
 
 
@@ -12,6 +11,7 @@ from ai_presenter.tools.json_trim import json_trim
 # add openai.api_key = config.get_ai_config().get_chatgpt_api_key()
 class TextChatGPT(TextAi):
     def __init__(self, db: Database):
+        self.chatgpt = ChatGPT()
         self.db = db
         self.messages = [
             {
@@ -46,16 +46,12 @@ class TextChatGPT(TextAi):
         self.user_message = {}
         self.user_message['actors'] = self.db.get_data()['actors']
 
-        openai.api_key = os.getenv("CHATGPT_APIKEY")
-        # config = self.db.get_config()
-        # openai.api_key = config.get_ai_config().get_chatgpt_api_key()
-
     def generate(self, s: Scene) -> str:
         self.user_message['scene'] = s.to_map()
         self.messages.append(
             {"role": "user", "content": json.dumps(self.user_message)}
         )
-        completion = openai.ChatCompletion.create(
+        resp = self.chatgpt.create(
             model="gpt-3.5-turbo",
             messages=self.messages,
         )
@@ -63,7 +59,6 @@ class TextChatGPT(TextAi):
         # self.messages = []
         self.user_message = {}
 
-        resp = completion.choices[0].message.content
         self.messages.append(
             {"role": "assistant", "content": resp}
         )
