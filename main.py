@@ -8,7 +8,7 @@ from ai_presenter.image_ai.fake import ImageAIFake
 from ai_presenter.ai_presenter import Generators
 from ai_presenter.voice_ai.elevenlabs import ElevenLabs
 from ai_presenter.voice_ai.fake import VoiceAIFake
-from ai_presenter.text_ai.chatgpt import TextChatGPT
+from ai_presenter.text_ai.chatgpt.text import TextChatGPT
 
 
 USAGE = '''
