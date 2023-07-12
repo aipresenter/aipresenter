@@ -19,7 +19,9 @@ class TextChatGPT(TextAi):
                 "content": "You will be provided with a set of characters, " +
                 "their description, and a scene in JSON format. " +
                 "Create dialogue using the plot and characters " +
-                "provided and return it in JSON format."
+                "provided and return it in JSON format.  Add a narrator" +
+                " with key 'narrator' describing the characters, scene," +
+                " and emotions."
             },
             {
                 "role": "user",
@@ -35,10 +37,12 @@ class TextChatGPT(TextAi):
             },
             {
                 "role": "assistant",
-                "content": '{"dialogue":[{"speaker":"Max Doe","message"' +
-                ':"Joana, I must say, your taste in bagels is utterly ' +
-                'appalling!"},{"speaker":"Joana Smith","message":' +
-                '"Max, you are right."}]};'
+                "content": '{"dialogue":[{"speaker":"narrator","message": ' +
+                '"Max stood close to Joana."},{"speaker":"Max Doe",' +
+                '"message":"Joana, I must say, your taste in bagels is ' +
+                'utterly appalling!"},{"speaker":"Joana Smith",' +
+                '"message":"Max, you are right."},{"speaker":"narrator",' +
+                '"message":"Finally Max was happy."}]}'
             }
 
         ]
