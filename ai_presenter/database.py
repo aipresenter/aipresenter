@@ -1,4 +1,5 @@
 import logging
+import random
 from ai_presenter.config.config import Config
 
 
@@ -22,14 +23,46 @@ class Database:
 
 class Actor:
     def __init__(self, data):
-        self.name = data['name']
-        self.description = data['description']
-        self.voice_type = data['voice_type']
-        self.age = data['age']
-        self.height = data['height']
-        self.gender = data['gender']
-        self.accent = data['accent']
-        logging.info(f'actor: name:{self.name} gender:{self.gender}')
+        try:
+            self.name = data['name']
+        except KeyError:
+            self.name = random.choice(['Alice', 'Bob', 'Charlie'])
+
+        try:
+            self.description = data['description']
+        except KeyError:
+            self.description = random.choice(['An angry antihero',
+                                              'A happy hero',
+                                              'An evil villain'])
+
+        try:
+            self.voice_type = data['voice_type']
+        except KeyError:
+            self.voice_type = random.choice(['Soprano',
+                                             'Alto', 'Tenor', 'Bass'])
+
+        try:
+            self.age = data['age']
+        except KeyError:
+            self.age = random.randint(20, 50)
+
+        try:
+            self.height = data['height']
+        except KeyError:
+            self.height = random.choice(['5 feet 8 inches',
+                                         '6 feet', '3 feet 2 inches'])
+
+        try:
+            self.gender = data['gender']
+        except KeyError:
+            self.gender = random.choice(['male', 'female'])
+
+        try:
+            self.accent = data['accent']
+        except KeyError:
+            self.accent = random.choice(['american',
+                                         'british', 'indian'])
+        logging.debug(f'actor: name:{self.name} gender:{self.gender}')
 
 
 class Scene:
