@@ -8,7 +8,7 @@ class Reader:
         self.file_path = file_path
         self.data = {}
         self.actors = {}
-        self.scenes = {}
+        self.scenes = []
         self.locations = {}
         with open(self.file_path, 'r') as file:
             self.data = yaml.safe_load(file)
@@ -18,7 +18,7 @@ class Reader:
             self.actors[a.name] = a
         for scene in self.data['scenes']:
             s = Scene(scene)
-            self.scenes[s.name] = s
+            self.scenes.append([s.name, s])
         for location in self.data['locations']:
             loc = Location(location)
             self.locations[loc.name] = loc
