@@ -18,7 +18,7 @@ class Reader:
             self.actors[a.name] = a
         for scene in self.data['scenes']:
             s = Scene(scene)
-            self.scenes.append([s.name, s])
+            self.scenes.append(s)
         for location in self.data['locations']:
             loc = Location(location)
             self.locations[loc.name] = loc
