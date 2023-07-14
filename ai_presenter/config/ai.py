@@ -15,7 +15,6 @@ class AIConfig:
         except Exception:
             self.voice_ai_filename = VOICE_AI_FILE
 
-
     def get_chatgpt_config(self) -> ChatGPTConfig:
         return self.chatgptconfig
 
