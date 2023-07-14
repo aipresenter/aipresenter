@@ -1,4 +1,3 @@
-from ai_presenter.config.chatgpt import ChatGPTConfig
 from ai_presenter.config.defaults import TEXT_AI_FILE, VOICE_AI_FILE
 from ai_presenter.config.env_vars import ELEVENLABS_APIKEY, CHATGPT_APIKEY
 
