@@ -2,8 +2,6 @@ config:
   ai_config:
     text_ai_filename: crime_case.txt
     voice_ai_filename: output.mp3
-    chatgpt_config:
-      style: you are a whimsical storyteller
 
 actors:
   - name: John Doe
