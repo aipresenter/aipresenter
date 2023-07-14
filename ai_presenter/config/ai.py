@@ -1,4 +1,3 @@
-from ai_presenter.config.chatgpt import ChatGPTConfig
 from ai_presenter.config.defaults import TEXT_AI_FILE, VOICE_AI_FILE
 from ai_presenter.config.env_vars import ELEVENLABS_APIKEY, CHATGPT_APIKEY
 
@@ -14,11 +13,6 @@ class AIConfig:
             self.voice_ai_filename = data['voice_ai_filename']
         except Exception:
             self.voice_ai_filename = VOICE_AI_FILE
-
-        self.chatgptconfig = ChatGPTConfig(data['chatgpt_config'])
-
-    def get_chatgpt_config(self) -> ChatGPTConfig:
-        return self.chatgptconfig
 
     def get_text_ai_filename(self) -> str:
         return self.text_ai_filename
