@@ -3,8 +3,8 @@ import logging
 
 
 class ChatGPT:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, db):
+        openai.api_key = db.get_config().get_ai_config().get_chatgpt_api_key()
 
     def create(self, model='', messages=None):
         full_resp = ""
