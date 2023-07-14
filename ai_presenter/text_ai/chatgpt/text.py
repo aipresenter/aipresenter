@@ -1,6 +1,5 @@
 import json
 import logging
-import openai
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database, Scene
 from ai_presenter.tools.json_trim import json_trim
