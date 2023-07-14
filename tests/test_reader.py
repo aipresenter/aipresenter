@@ -16,7 +16,7 @@ class TestReader(unittest.TestCase):
 
         for scene in ['Cabin', 'Interrogation Room',
                       'Laboratory', 'Courtroom']:
-            self.assertEqual(scene, s[counter][0])
+            self.assertEqual(scene, s[counter].name)
             counter += 1
 
         for location in ['Mountains', 'Cabin']:
