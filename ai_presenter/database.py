@@ -2,6 +2,9 @@ import logging
 import random
 from ai_presenter.config.config import Config
 
+global max_scenes
+max_scenes = 10
+
 
 class Database:
     def __init__(
@@ -19,6 +22,10 @@ class Database:
 
     def get_data(self):
         return self.alldata
+
+    def check_valid(self):
+        if self.scenes > max_scenes:
+            raise Exception("Scene limit of 10 passed.")
 
 
 class Actor:
