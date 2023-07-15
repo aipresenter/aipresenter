@@ -4,5 +4,5 @@ __pycache__
 *.pyc
 *.txt
 !requirements.txt
-*.wav
+*.mp3
 tests/text.json

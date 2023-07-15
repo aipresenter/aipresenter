@@ -106,4 +106,4 @@ class ElevenLabs(VoiceAI):
             voice.delete()
             logging.info(f"Deleted voice: {voice.name.lower()}")
 
-        logging.info("Successfully cleared all voices")
+        logging.info("Successfully cleared voices generated")
