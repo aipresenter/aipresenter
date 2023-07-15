@@ -11,7 +11,7 @@ from ai_presenter.text_ai.chatgpt.chatgpt import ChatGPT
 # add openai.api_key = config.get_ai_config().get_chatgpt_api_key()
 class TextChatGPT(TextAi):
     def __init__(self, db: Database):
-        self.chatgpt = ChatGPT()
+        self.chatgpt = ChatGPT(db)
         self.db = db
         self.messages = [
             {
