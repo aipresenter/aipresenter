@@ -1,10 +1,11 @@
 import openai
+import os
 import logging
 
 
 class ChatGPT:
     def __init__(self) -> None:
-        pass
+        openai.api_key = os.getenv("CHATGPT_APIKEY")
 
     def create(self, model='', messages=None):
         full_resp = ""
