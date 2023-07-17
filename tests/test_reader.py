@@ -9,19 +9,21 @@ class TestReader(unittest.TestCase):
         s = x.get_scenes()
         loc = x.get_locations()
         db = x.get_db()
+        counter = 0
 
         for actor in ['John Doe', 'Jane Smith', 'Michael Johnson']:
             self.assertIn(actor, a)
 
         for scene in ['Cabin', 'Interrogation Room',
                       'Laboratory', 'Courtroom']:
-            self.assertIn(scene, s)
+            self.assertEqual(scene, s[counter].name)
+            counter += 1
 
         for location in ['Mountains', 'Cabin']:
             self.assertIn(location, loc)
 
         self.assertDictEqual(a, db.actors)
-        self.assertDictEqual(s, db.scenes)
+        self.assertListEqual(s, db.scenes)
         self.assertDictEqual(loc, db.locations)
 
 

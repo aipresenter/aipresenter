@@ -1,0 +1,71 @@
+config:
+  ai_config:
+    text_ai_filename: text_ai.txt
+    voice_ai_filename: voice_ai.mp3
+    chatgpt_config:
+      style: you are a whimsical storyteller
+
+actors:
+  - name: John Doe
+    description: A charismatic detective
+    voice_type: Baritone
+    age: middle_aged
+    height: 6 feet
+    gender: male
+    accent: indian
+
+  - name: Jane Smith
+    description: A brilliant scientist
+    voice_type: Soprano
+    age: young
+    height: 5 feet 8 inches
+    gender: female
+    accent: british
+
+  - name: Michael Johnson
+    description: A wise mentor
+    voice_type: Bass
+    age: old
+    height: 6 feet 2 inches
+    gender: male
+    accent: american
+
+locations:
+  - name: Mountains
+    type: outside
+    lighting: Daylight
+
+  - name: Cabin
+    type: inside
+    lighting: Dim
+
+scenes:
+  - location: Cabin
+    characters:
+      - John Doe
+      - Jane Smith
+    plot:
+      - "John and Jane are investigating a murder. They find a bloodied knife hidden under a sandwich"
+
+  - location: Interrogation Room
+    characters:
+      - John Doe
+      - Jane Smith
+      - Micheal Johnson
+    plot:
+      - "Michael is a suspect being interrogated by Jane and John play good cop bad cop."
+
+  - location: Interrogation Room
+    characters:
+      - John Doe
+      - Jane Smith
+    plot:
+      - "John and Jane interrogate Michael once again but Michael tries to escape."
+
+  - location: Cabin
+    characters:
+      - John Doe
+      - Jane Smith
+      - Micheal Johnson
+    plot:
+      - "John and Jane continue to chase Micahel, and the find him dead at the cabin."
