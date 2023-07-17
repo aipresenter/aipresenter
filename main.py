@@ -26,7 +26,7 @@ parser.add_argument(
     'characters and the plot'
 )
 parser.add_argument(
-    '--json', dest='json', default='',
+    '--json', dest='json', type=str, default='',
     help='Path to JSON file that will be used to generate audio'
 )
 parser.add_argument(
