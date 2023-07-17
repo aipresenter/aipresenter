@@ -9,6 +9,7 @@ from ai_presenter.ai_presenter import Generators
 from ai_presenter.voice_ai.elevenlabs import ElevenLabs
 from ai_presenter.voice_ai.fake import VoiceAIFake
 from ai_presenter.text_ai.chatgpt.text import TextChatGPT
+from ai_presenter.text_ai.chatgpt.script import ScriptChatGPT
 
 
 USAGE = '''
@@ -20,7 +21,7 @@ Examples:
 '''
 parser = argparse.ArgumentParser(description='AI Presenter')
 parser.add_argument(
-    '--script', dest='script', required=True,
+    '--script', dest='script',
     default='', help='Path to the YAML script which contains ' +
     'characters and the plot'
 )
@@ -36,26 +37,44 @@ parser.add_argument(
     '--debug', dest='debug', default=False,
     help='Debugging log level'
 )
+parser.add_argument(
+    '--plot', dest='plot',
+    default='', help='Plot to send to ChatGPT to create scenes',
+)
+parser.add_argument(
+    '--script-out', dest='scriptout',
+    default='', help='Path to the YAML script to write',
+)
 args = parser.parse_args()
-
-if args.script == '':
-    print("Missing script file")
-    sys.exit(1)
-
-valid_text_options = ['chatgpt', 'fake']
-if args.textai not in valid_text_options:
-    print("Please provide a valid option:" +
-          "chatgpt or fake")
-    sys.exit(1)
-
-valid_voice_options = ['elevenlabs', 'fake']
-if args.voiceai not in valid_voice_options:
-    print("Please provide a valid option:" +
-          "elevenlabs or fake")
-    sys.exit(1)
 
 
 def main():
+    if args.plot != '':
+        if args.scriptout == '':
+            print("Missing output script file")
+            sys.exit(1)
+        gpt = ScriptChatGPT()
+        with open(args.scriptout, 'w') as file:
+            file.write(gpt.generate(args.plot) + '\n')
+        logging.info("Done")
+        sys.exit(0)
+
+    if args.script == '':
+        print("Missing script file")
+        sys.exit(1)
+
+    valid_text_options = ['chatgpt', 'fake']
+    if args.textai not in valid_text_options:
+        print("Please provide a valid option:" +
+              "chatgpt or fake")
+        sys.exit(1)
+
+    valid_voice_options = ['elevenlabs', 'fake']
+    if args.voiceai not in valid_voice_options:
+        print("Please provide a valid option:" +
+              "elevenlabs or fake")
+        sys.exit(1)
+
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
     else:

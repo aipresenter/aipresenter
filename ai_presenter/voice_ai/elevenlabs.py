@@ -4,6 +4,7 @@ from ai_presenter.config.voice import VoiceConfig
 from elevenlabs import generate, save, Iterator, VoiceDesign, Voice
 from elevenlabs import set_api_key
 from elevenlabs.api import Voices
+from ai_presenter.config.env_vars import get_elevenlabs_api_key
 import logging
 
 
@@ -52,7 +53,7 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
 class ElevenLabs(VoiceAI):
     def __init__(self, db: Database):
         super().__init__(db)
-        set_api_key(db.get_config().get_ai_config().get_elevenlabs_api_key())
+        set_api_key(get_elevenlabs_api_key())
         # list that keeps track of new voices created in this run
         self.generated_voices = []
         self.voices = Voices.from_api()
