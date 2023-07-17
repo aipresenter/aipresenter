@@ -26,6 +26,10 @@ parser.add_argument(
     'characters and the plot'
 )
 parser.add_argument(
+    '--json', dest='json', default='',
+    help='Path to JSON file that will be used to generate audio'
+)
+parser.add_argument(
     '--textai', dest='textai', default='fake',
     help='Use chatgpt or fake'
 )
@@ -75,6 +79,8 @@ def main():
               "elevenlabs or fake")
         sys.exit(1)
 
+    
+        
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
@@ -96,6 +102,9 @@ def main():
     image_fake = ImageAIFake()
     generator = Generators(textai, voiceai, image_fake)
     ai = AIPresenter(db, generator)
+    if args.json != '':
+        ai.json_run(args.json)
+        sys.exit(0)
     ai.run()
 
 
