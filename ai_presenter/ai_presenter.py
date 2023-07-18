@@ -27,8 +27,6 @@ class AIPresenter:
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
 
-    def json_run(self, json_file: str):
-        config = self.database.get_config()
-        voice_ai_file = config.get_ai_config().get_voice_ai_filename()
+    def json_run(self, json_file: str, audio_out: str):
         voiceai = self.generator.get_voice()
-        voiceai.generate(json_file, voice_ai_file)
+        voiceai.generate(json_file, audio_out)

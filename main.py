@@ -31,6 +31,10 @@ parser.add_argument(
     help='Path to JSON file that will be used to generate audio'
 )
 parser.add_argument(
+    '--audio-out', dest='audioout', type=str, default='',
+    help='Path to MP3 file that will contain generated audio'
+)
+parser.add_argument(
     '--textai', dest='textai', default='fake',
     help='Use chatgpt or fake'
 )
@@ -86,6 +90,10 @@ def main():
         logging.basicConfig(level=logging.INFO)
 
     logging.info("Program starting")
+    if args.json != '' and args.audioout != ''and os.path.exists(args.json):
+        ai.json_run(args.json, args.audioout)
+        sys.exit(0)
+
     reader = Reader(args.script)
     db = reader.get_db()
 
@@ -101,10 +109,6 @@ def main():
     image_fake = ImageAIFake()
     generator = Generators(textai, voiceai, image_fake)
     ai = AIPresenter(db, generator)
-
-    if args.json != '' and os.path.exists(args.json):
-        ai.json_run(args.json)
-        sys.exit(0)
 
     ai.run()
 
