@@ -2,8 +2,8 @@ from ai_presenter.text_ai.chatgpt.chatgpt import ChatGPT
 
 
 class ScriptChatGPT:
-    def __init__(self, db):
-        self.chatgpt = ChatGPT(db)
+    def __init__(self):
+        self.chatgpt = ChatGPT()
         self.messages = [
             {
                 "role": "system",
