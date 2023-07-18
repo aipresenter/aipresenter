@@ -103,11 +103,11 @@ def main():
     image_fake = ImageAIFake()
     generator = Generators(textai, voiceai, image_fake)
     ai = AIPresenter(db, generator)
-    
+
     if args.json != '' and os.path.exists(args.json):
         ai.json_run(args.json)
         sys.exit(0)
-        
+
     ai.run()
 
 
