@@ -1,6 +1,7 @@
 import logging
 import argparse
 import sys
+import os
 from ai_presenter.ai_presenter import AIPresenter
 from ai_presenter.reader import Reader
 from ai_presenter.text_ai.fake import TextFake
@@ -24,6 +25,10 @@ parser.add_argument(
     '--script', dest='script',
     default='', help='Path to the YAML script which contains ' +
     'characters and the plot'
+)
+parser.add_argument(
+    '--json', dest='json', type=str, default='',
+    help='Path to JSON file that will be used to generate audio'
 )
 parser.add_argument(
     '--textai', dest='textai', default='fake',
@@ -96,6 +101,11 @@ def main():
     image_fake = ImageAIFake()
     generator = Generators(textai, voiceai, image_fake)
     ai = AIPresenter(db, generator)
+
+    if args.json != '' and os.path.exists(args.json):
+        ai.json_run(args.json)
+        sys.exit(0)
+
     ai.run()
 
 
