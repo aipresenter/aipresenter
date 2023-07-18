@@ -61,7 +61,6 @@ class VoiceAI:
                                                    self.actors[name].
                                                    description)
                     self.characters[name] = self.new_actor(character_config)
-                    # bug happens here
                 except Exception:
                     character_config = VoiceConfig(name,
                                                    'male',
