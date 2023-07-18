@@ -57,6 +57,7 @@ class JSON:
         self.generated_voices = []
         self.voices = Voices.from_api()
         self.characters = {}
+        self.actors = []
 
     def new_actor(self, config: VoiceConfig) -> VoiceAIActor:
         voice = self.__find_voice(config.name)
@@ -115,6 +116,7 @@ class JSON:
     def create_character_db(self, line: str):
         json_string = line.strip()
         data = json.loads(json_string)
+        self.fill_actors()
 
         for message in data['dialogue']:
             name = message['speaker']
