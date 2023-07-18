@@ -80,8 +80,6 @@ def main():
               "elevenlabs or fake")
         sys.exit(1)
 
-    
-        
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
