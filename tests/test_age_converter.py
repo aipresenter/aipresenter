@@ -8,6 +8,10 @@ class TestAgeConverter(unittest.TestCase):
         with self.assertRaises(Exception):
             age_converter(-4)
 
+        # exception raised for non int age
+        with self.assertRaises(Exception):
+            age_converter('middle_aged')
+
         # returns 'young' between 0 and 34
         expected = 'young'
         recieved = age_converter(0)
