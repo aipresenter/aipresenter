@@ -39,7 +39,8 @@ parser.add_argument(
     help='Use elevenlabs or fake'
 )
 parser.add_argument(
-    '--debug', dest='debug', default=False,
+    '--debug', dest='debug',
+    action=argparse.BooleanOptionalAction,
     help='Debugging log level'
 )
 parser.add_argument(
@@ -49,6 +50,11 @@ parser.add_argument(
 parser.add_argument(
     '--script-out', dest='scriptout',
     default='', help='Path to the YAML script to write',
+)
+parser.add_argument(
+    '--narrator', dest='narrator',
+    action=argparse.BooleanOptionalAction,
+    help='Narrator inclusion; True or False'
 )
 args = parser.parse_args()
 
@@ -90,7 +96,7 @@ def main():
     db = reader.get_db()
 
     if args.textai == 'chatgpt':
-        textai = TextChatGPT(db)
+        textai = TextChatGPT(db, args.narrator)
     else:
         textai = TextFake(db)
     if args.voiceai == 'elevenlabs':

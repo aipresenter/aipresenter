@@ -21,7 +21,7 @@ class ScriptChatGPT:
 config:
   ai_config:
     text_ai_filename: europa.txt
-    voice_ai_filename: europa.wav
+    voice_ai_filename: europa.mp3
     chatgpt_config:
       style: you are a suspenseful storyteller
 actors:
