@@ -60,11 +60,17 @@ args = parser.parse_args()
 
 
 def main():
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
     if args.plot != '':
         if args.scriptout == '':
             print("Missing output script file")
             sys.exit(1)
         gpt = ScriptChatGPT()
+        logging.info("Writing to file: " + args.scriptout)
         with open(args.scriptout, 'w') as file:
             file.write(gpt.generate(args.plot) + '\n')
         logging.info("Done")
@@ -85,11 +91,6 @@ def main():
         print("Please provide a valid option:" +
               "elevenlabs or fake")
         sys.exit(1)
-
-    if args.debug:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
 
     logging.info("Program starting")
     reader = Reader(args.script)
