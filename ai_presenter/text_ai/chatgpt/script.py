@@ -1,3 +1,4 @@
+import logging
 from ai_presenter.text_ai.chatgpt.chatgpt import ChatGPT
 
 
@@ -89,6 +90,7 @@ scenes:
         ]
 
     def generate(self, plot: str) -> str:
+        logging.info("Getting information from Chatgpt...")
         self.messages.append(
             {"role": "user", "content": plot},
         )
