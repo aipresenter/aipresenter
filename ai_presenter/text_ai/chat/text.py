@@ -3,9 +3,9 @@ import logging
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database, Scene
 from ai_presenter.tools.json_trim import json_trim
-from ai_presenter.text_ai.chatgpt.gpt import ChatGPT
-from ai_presenter.text_ai.chatgpt.text_init import INIT_NARRATOR
-from ai_presenter.text_ai.chatgpt.text_init import INIT_NO_NARRATOR
+from ai_presenter.text_ai.chat.gpt import ChatGPT
+from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
+from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
 # import ai_presenter.config.env_vars
 
 

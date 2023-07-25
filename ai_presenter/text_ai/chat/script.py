@@ -1,5 +1,5 @@
 import logging
-from ai_presenter.text_ai.chatgpt.gpt import ChatGPT
+from ai_presenter.text_ai.chat.gpt import ChatGPT
 
 
 class ScriptChatGPT:
