@@ -6,8 +6,8 @@ from ai_presenter.text_ai.chat.base import BaseChatGPT
 
 
 class FakeChatGPT(BaseChatGPT):
-    def __init__(self) -> None:
-        openai.api_key = get_chatgpt_api_key()
+    def __init__(self):
+        super().__init__()
 
     def create(self, model='', messages=None):
         logging.debug('chatgpt: got all info')
