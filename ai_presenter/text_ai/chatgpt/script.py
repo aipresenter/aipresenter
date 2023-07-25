@@ -1,10 +1,10 @@
 import logging
-from ai_presenter.text_ai.chatgpt.fake import ChatFake
+from ai_presenter.text_ai.chatgpt.fake import FakeChatGPT
 
 
 class ScriptChatGPT:
     def __init__(self):
-        self.chatgpt = ChatFake()
+        self.chatgpt = FakeChatGPT()
         self.messages = [
             {
                 "role": "system",
