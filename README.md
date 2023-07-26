@@ -68,7 +68,7 @@ python3 main.py \
 ```
 
 ### dialogue and audio generation
-In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter ```--narrator```, then used by elevenlabs to generate an mp3 file of the dialogue
+In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter `--narrator`, then used by elevenlabs to generate an mp3 file of the dialogue
 
 ```
 python3 main.py \
