@@ -59,6 +59,13 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+def plot_run(debug_lvl):
+    pass
+
+def script_run(debug_lvl):
+    pass
+
+
 
 def main():
     if args.debug:
