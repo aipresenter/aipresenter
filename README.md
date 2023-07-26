@@ -6,29 +6,37 @@ _aipresenter_ makes it easy to create stories using ChatGPT, for dialogue and sc
 ### Setup
 ```
 python3 -m venv venv
-python -m venv venv; source venv/bin/activate
 ```
 
 ### Command options
-Use --help to bring up an option menu:
+Use ```--help``` to bring up an option menu:
+
 ```
 python3 main.py --help
 ```
+
 Through this interface, _aipresenter_ can be used for:
 * script generation from a plot
-* dialouge generation from a script
+* dialogue generation from a script
 * audio generation from dialogue
 
-### Example of script generation
+## Examples
+
+### script generation
 ```
 python3 main.py --plot="a plot with 3 scenes about a space war around Europa" --script-out=myscript.yml
 ```
 
-### Example of dialogue and audio generation
+In this example, the plot is used by chatgpt to create a script and return it as ```myscript.yml```
+
+### dialogue and audio generation
+
 ```
-python3 main.py --script=myscript.yml --textai=chatgpt --voiceai=elevenlabs
---narrator
+python3 main.py --script=myscript.yml --textai=chatgpt --voiceai=elevenlabs \ --narrator
 ```
+
+In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter ```--narrator```, then used by elevenlabs to generate an mp3 file of the dialogue
+
 
 ## Audio Examples
 
