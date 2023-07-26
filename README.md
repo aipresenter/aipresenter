@@ -4,12 +4,48 @@ _aipresenter_ makes it easy to create stories using ChatGPT, for dialogue and sc
 ## Usage
 
 ### Setup
+1. Open your terminal or command prompt
+2. Create a new directory to house the _aipresenter_ project.
+
 ```
-python3 -m venv venv
+mkdir example_project
+```
+
+3. Move into that directory
+
+```
+cd example_project
+```
+
+4. Clone the project's main branch
+
+```
+git clone git@github.com:aipresenter/aipresenter.git
+```
+
+5. Move into the aipresenter directory
+```
+cd aipresenter
+```
+
+6. Create your virtual environment
+```
+python3 -m venv venv; source venv/bin/activate
+```
+
+7. Update your virtual environment
+```
+pip install -r requirements.txt
+```
+
+8. Create environment variables for the api keys.
+```
+export CHATGPT_APIKEY=your_chatgpt_api_key
+export ELEVENLABS_APIKEY=your_elevenlabs_api_key
 ```
 
 ### Command options
-Use ```--help``` to bring up an option menu:
+Use `--help` to bring up an option menu:
 
 ```
 python3 main.py --help
@@ -23,20 +59,24 @@ Through this interface, _aipresenter_ can be used for:
 ## Examples
 
 ### script generation
-```
-python3 main.py --plot="a plot with 3 scenes about a space war around Europa" --script-out=myscript.yml
-```
+In this example, the plot is used by chatgpt to create a script and return it as `myscript.yml`
 
-In this example, the plot is used by chatgpt to create a script and return it as ```myscript.yml```
+```
+python3 main.py \
+--plot="a plot with 3 scenes about a space war around Europa" \
+--script-out=myscript.yml
+```
 
 ### dialogue and audio generation
-
-```
-python3 main.py --script=myscript.yml --textai=chatgpt --voiceai=elevenlabs \ --narrator
-```
-
 In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter ```--narrator```, then used by elevenlabs to generate an mp3 file of the dialogue
 
+```
+python3 main.py \
+  --script=myscript.yml \
+  --textai=chatgpt \
+  --voiceai=elevenlabs \
+  --narrator
+```
 
 ## Audio Examples
 
