@@ -59,10 +59,18 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-def plot_run(debug_lvl):
+def plot_run():
+    gpt = ScriptChatGPT()
+    logging.info("Writing to file: " + args.scriptout)
+    with open(args.scriptout, 'w') as file:
+        file.write(gpt.generate(args.plot) + '\n')
+    logging.info("Done")
+    sys.exit(0)
+
+def script_run():
     pass
 
-def script_run(debug_lvl):
+def json_run():
     pass
 
 
@@ -77,13 +85,7 @@ def main():
         if args.scriptout == '':
             print("Missing output script file")
             sys.exit(1)
-        chat_model = ChatGPT()
-        gpt = ScriptChatGPT(chat_model)
-        logging.info("Writing to file: " + args.scriptout)
-        with open(args.scriptout, 'w') as file:
-            file.write(gpt.generate(args.plot) + '\n')
-        logging.info("Done")
-        sys.exit(0)
+        plot_run()
 
     if args.script == '':
         print("Missing script file")
