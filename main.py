@@ -9,8 +9,9 @@ from ai_presenter.image_ai.fake import ImageAIFake
 from ai_presenter.ai_presenter import Generators
 from ai_presenter.voice_ai.elevenlabs import ElevenLabs
 from ai_presenter.voice_ai.fake import VoiceAIFake
-from ai_presenter.text_ai.chatgpt.text import TextChatGPT
-from ai_presenter.text_ai.chatgpt.script import ScriptChatGPT
+from ai_presenter.text_ai.chat.text import TextChatGPT
+from ai_presenter.text_ai.chat.script import ScriptChatGPT
+from ai_presenter.text_ai.chat.gpt import ChatGPT
 
 
 USAGE = '''
@@ -69,7 +70,8 @@ def main():
         if args.scriptout == '':
             print("Missing output script file")
             sys.exit(1)
-        gpt = ScriptChatGPT()
+        chat_model = ChatGPT()
+        gpt = ScriptChatGPT(chat_model)
         logging.info("Writing to file: " + args.scriptout)
         with open(args.scriptout, 'w') as file:
             file.write(gpt.generate(args.plot) + '\n')
@@ -97,7 +99,8 @@ def main():
     db = reader.get_db()
 
     if args.textai == 'chatgpt':
-        textai = TextChatGPT(db, args.narrator)
+        chat_model = ChatGPT()
+        textai = TextChatGPT(db, args.narrator, chat_model)
     else:
         textai = TextFake(db)
     if args.voiceai == 'elevenlabs':

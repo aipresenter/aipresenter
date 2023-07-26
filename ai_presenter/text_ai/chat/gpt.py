@@ -1,10 +1,12 @@
 import openai
 import logging
 from ai_presenter.config.env_vars import get_chatgpt_api_key
+from ai_presenter.text_ai.chat.base import BaseChatGPT
 
 
-class ChatGPT:
-    def __init__(self) -> None:
+class ChatGPT(BaseChatGPT):
+    def __init__(self):
+        super().__init__()
         openai.api_key = get_chatgpt_api_key()
 
     def create(self, model='', messages=None):
