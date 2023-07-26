@@ -3,7 +3,7 @@ import logging
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database, Scene
 from ai_presenter.tools.json_trim import json_trim
-from ai_presenter.text_ai.chat.gpt import ChatGPT
+from ai_presenter.text_ai.chat.base import BaseChatGPT
 from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
 from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
 # import ai_presenter.config.env_vars
@@ -12,8 +12,9 @@ from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
 # in the __init__ for this class,
 # add openai.api_key = config.get_ai_config().get_chatgpt_api_key()
 class TextChatGPT(TextAi):
-    def __init__(self, db: Database, use_narrator: bool):
-        self.chatgpt = ChatGPT()
+    def __init__(self, db: Database, use_narrator: bool, chatgpt: BaseChatGPT):
+        # chatgpt parameter added for testing purposes
+        self.chatgpt = chatgpt
         self.db = db
         logging.debug(f'Narrator is {use_narrator}')
         if use_narrator:
