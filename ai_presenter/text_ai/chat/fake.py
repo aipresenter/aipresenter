@@ -5,7 +5,7 @@ from ai_presenter.text_ai.chat.base import BaseChatGPT
 
 class FakeChatGPT(BaseChatGPT):
     def __init__(self):
-        pass
+        super().__init__()
 
     def create(self, model='', messages=None):
         logging.debug('chatgpt: got all info')
