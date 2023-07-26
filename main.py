@@ -99,7 +99,7 @@ def main():
     db = reader.get_db()
 
     if args.textai == 'chatgpt':
-        chat_model = ChatGPT() 
+        chat_model = ChatGPT()
         textai = TextChatGPT(db, args.narrator, chat_model)
     else:
         textai = TextFake(db)
