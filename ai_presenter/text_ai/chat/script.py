@@ -30,28 +30,28 @@ actors:
   - name: Captain Ryan Thompson
     description: fearless leader of a space fleet
     voice_type: unused
-    age: middle_aged
+    age: 40
     height: 6 feet
     gender: male
     accent: american
   - name: Lieutenant Ava Ramirez
     description: brilliant pilot and strategist
     voice_type: unused
-    age: young
+    age: 23
     height: 5 feet 5 inches
     gender: female
     accent: american
   - name: Sergeant Marcus Chen
     description: skilled technician and weapons expert
     voice_type: unused
-    age: old
+    age: 55
     height: 5 feet 10 inches
     gender: male
     accent: english
   - name: Dr. Sophia Collins
     description: brilliant scientist specializing in alien life forms
     voice_type: unused
-    age: middle_aged
+    age: 36
     height: 5 feet 8 inches
     gender: female
     accent: british

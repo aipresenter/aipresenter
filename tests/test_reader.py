@@ -11,15 +11,18 @@ class TestReader(unittest.TestCase):
         db = x.get_db()
         counter = 0
 
-        for actor in ['John Doe', 'Jane Smith', 'Michael Johnson']:
+        for actor in ['Captain Ryan Thompson',
+                      'Lieutenant Ava Ramirez',
+                      'Sergeant Marcus Chen',
+                      'Dr. Sophia Collins']:
             self.assertIn(actor, a)
 
-        for scene in ['Cabin', 'Interrogation Room',
-                      'Laboratory', 'Courtroom']:
-            self.assertEqual(scene, s[counter].name)
+        for scene in ['Spaceship Bridge', 'Europa\'s Orbit',
+                      'Europa\'s Surface', 'Europa Research Outpost']:
+            self.assertEqual(scene, s[counter].location)
             counter += 1
 
-        for location in ['Mountains', 'Cabin']:
+        for location in ['Spaceship Bridge']:
             self.assertIn(location, loc)
 
         self.assertDictEqual(a, db.actors)

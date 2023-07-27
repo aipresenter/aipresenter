@@ -17,8 +17,7 @@ class AIPresenter:
         with open(text_ai_file, 'w') as file:
             textai = self.generator.get_text()
             for scene in self.database.scenes:
-                logging.info(f"Working on scene: {scene.name} in " +
-                             f"{scene.location}")
+                logging.info(f"Working on scene: {scene.location}")
 
                 output = textai.generate(scene)
                 file.write(output + '\n')
