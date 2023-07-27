@@ -67,30 +67,7 @@ def plot_run():
     logging.info("Done")
     sys.exit(0)
 
-def script_run():
-    pass
-
-def json_run():
-    pass
-
-
-
-def main():
-    if args.debug:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
-
-    if args.plot != '':
-        if args.scriptout == '':
-            print("Missing output script file")
-            sys.exit(1)
-        plot_run()
-
-    if args.script == '':
-        print("Missing script file")
-        sys.exit(1)
-
+def script_run(args):
     valid_text_options = ['chatgpt', 'fake']
     if args.textai not in valid_text_options:
         print("Please provide a valid option:" +
@@ -126,6 +103,24 @@ def main():
         sys.exit(0)
 
     ai.run()
+
+def main():
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
+    if args.plot != '':
+        if args.scriptout == '':
+            print("Missing output script file")
+            sys.exit(1)
+        plot_run()
+
+    if args.script == '':
+        print("Missing script file")
+        sys.exit(1)
+
+    script_run(args)
 
 
 if __name__ == '__main__':
