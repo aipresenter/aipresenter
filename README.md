@@ -20,7 +20,7 @@ cd example_project
 4. Clone the project's main branch
 
 ```
-git clone git@github.com:aipresenter/aipresenter.git
+git clone https://github.com/aipresenter/aipresenter.git
 ```
 
 5. Move into the aipresenter directory
@@ -67,8 +67,10 @@ python3 main.py \
 --script-out=myscript.yml
 ```
 
+Once completed the script is written to the file myscript.yml, and is accessable in the aipresenter folder.
+
 ### dialogue and audio generation
-In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter `--narrator`, then used by elevenlabs to generate an mp3 file of the dialogue
+In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter `--narrator`, then used by elevenlabs to generate an mp3 file of the dialogue.
 
 ```
 python3 main.py \
@@ -78,6 +80,7 @@ python3 main.py \
   --narrator
 ```
 
+Once completed the mp3 file becomes avaliable in the aipresenter folder for listening.
 ## Audio Examples
 
 #### War over Europa
