@@ -12,7 +12,8 @@ class TestScenes(unittest.TestCase):
 
         for scene in ['Cabin', 'Interrogation Room',
                       'Interrogation Room', 'Cabin']:
-            self.assertEqual(scene, s[counter].name)
+            self.assertEqual(scene, s[counter].location)
+
             counter += 1
 
         self.assertListEqual(s, db.scenes)

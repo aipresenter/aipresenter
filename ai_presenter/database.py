@@ -67,12 +67,26 @@ class Actor:
 
 class Scene:
     def __init__(self, data):
-        self.name = data['location']
-        self.location = data['location']
-        self.actors = data['characters']
-        self.plot = data['plot']
+        try:
+            self.location = data['location']
+        except KeyError:
+            self.location = random.choice(['Inside', 'Outside',
+                                           'The Void'])
+
+        try:
+            self.actors = data['characters']
+        except KeyError:
+            self.actors = random.choice(['Alice', 'Bob', 'Charlie'])
+
+        try:
+            self.plot = data['plot']
+        except KeyError:
+            self.plot = random.choice(['An unexpected twist',
+                                       'The introduction of a new villain',
+                                       'The story flips on its head'])
+
         self.alldata = data
-        logging.info(f'scene: name:{self.name} location:{self.location}')
+        logging.info(f'scene: {self.location}')
 
     def to_map(self):
         return self.alldata
@@ -80,7 +94,22 @@ class Scene:
 
 class Location:
     def __init__(self, data):
-        self.name = data['name']
-        self.type = data['type']
-        self.lighting = data['lighting']
+        try:
+            self.name = data['name']
+        except KeyError:
+            self.name = random.choice(['Inside', 'Outside',
+                                       'The last place you would expect'])
+
+        try:
+            self.type = data['type']
+        except KeyError:
+            self.type = random.choice(['interior', 'exterior'])
+
+        try:
+            self.lighting = data['lighting']
+        except KeyError:
+            self.lighting = random.choice(['Dimly lit',
+                                           'Well lit',
+                                           'Pitch black'])
+
         logging.info(f'location: name:{self.name} type:{self.type}')
