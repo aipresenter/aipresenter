@@ -1,6 +1,86 @@
 # AI Presenter
-aipresenter makes it easy to create stories using ChatGPT, for dialogue and scenes, and ElevenLabs, for voice generation. Currently, aipresenter outputs an audio file, but in future releases we would like to output fully integrated video slideshow stories.
+_aipresenter_ makes it easy to create stories using ChatGPT, for dialogue and scenes, and ElevenLabs, for voice generation. Currently, aipresenter outputs an audio file, but in future releases we would like to output fully integrated video slideshow stories.
 
+## Usage
+
+### Setup
+1. Open your terminal or command prompt
+2. Create a new directory to house the _aipresenter_ project.
+
+```
+mkdir example_project
+```
+
+3. Move into that directory
+
+```
+cd example_project
+```
+
+4. Clone the project's main branch
+
+```
+git clone https://github.com/aipresenter/aipresenter.git
+```
+
+5. Move into the aipresenter directory
+```
+cd aipresenter
+```
+
+6. Create your virtual environment
+```
+python3 -m venv venv; source venv/bin/activate
+```
+
+7. Update your virtual environment
+```
+pip install -r requirements.txt
+```
+
+8. Create environment variables for the api keys.
+```
+export CHATGPT_APIKEY=your_chatgpt_api_key
+export ELEVENLABS_APIKEY=your_elevenlabs_api_key
+```
+
+### Command options
+Use `--help` to bring up an option menu:
+
+```
+python3 main.py --help
+```
+
+Through this interface, _aipresenter_ can be used for:
+* script generation from a plot
+* dialogue generation from a script
+* audio generation from dialogue
+
+## Examples
+
+### script generation
+In this example, the plot is used by chatgpt to create a script and return it as `myscript.yml`
+
+```
+python3 main.py \
+--plot="a plot with 3 scenes about a space war around Europa" \
+--script-out=myscript.yml
+```
+
+Once completed the script is written to the file myscript.yml, and is accessable in the aipresenter folder.
+
+### dialogue and audio generation
+In this example, the script is used by chatgpt to generate dialogue, which includes a narrator due to the parameter `--narrator`, then used by elevenlabs to generate an mp3 file of the dialogue.
+
+```
+python3 main.py \
+  --script=myscript.yml \
+  --textai=chatgpt \
+  --voiceai=elevenlabs \
+  --narrator
+```
+
+Once completed the mp3 file becomes avaliable in the aipresenter folder for listening.
 ## Audio Examples
 
 #### War over Europa
