@@ -59,6 +59,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+
 def plot_run():
     gpt = ScriptChatGPT()
     logging.info("Writing to file: " + args.scriptout)
@@ -66,6 +67,7 @@ def plot_run():
         file.write(gpt.generate(args.plot) + '\n')
     logging.info("Done")
     sys.exit(0)
+
 
 def script_run(args):
     valid_text_options = ['chatgpt', 'fake']
@@ -103,6 +105,7 @@ def script_run(args):
         sys.exit(0)
 
     ai.run()
+
 
 def main():
     if args.debug:
