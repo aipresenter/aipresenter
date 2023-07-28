@@ -10,43 +10,31 @@ class FakeChatGPT(BaseChatGPT):
     def create(self, model='', messages=None):
         logging.debug('chatgpt: got all info')
         dialogue = {
-            "characters": [
-                {
-                    "name": "John Doe",
-                    "personality": "authoritative and stubborn",
-                    "emotion": "stubborn"
-                },
-                {
-                    "name": "Jane Smith",
-                    "personality": "boisterous and foolheaded",
-                    "emotion": "cheerful"
-                },
-                {
-                    "name": "Michael Johnson",
-                    "personality": "determined and informative",
-                    "emotion": "calm"
-                }
-            ],
             "dialogue": [
                 {
                     "speaker": "John Doe",
-                    "message": "Immanuel, I must say, your taste in " +
-                    "bagels is utterly appalling!",
-                    "emotion": "indignant"
+                    "message": "Listen, Michael. We know you're involved" +
+                    "in this. Just tell us the truth and it will go" +
+                    "easier for you."
                 },
                 {
                     "speaker": "Jane Smith",
-                    "message": "Oh, Don Luis, my friend, you're " +
-                    "missing out on the joy of adventurous flavors!",
-                    "emotion": "enthusiastic"
+                    "message": "John's right, Michael. We have evidence" +
+                    "against you. It's better if you cooperate and confess."
                 },
                 {
                     "speaker": "Michael Johnson",
-                    "message": "The argument continues heatedly",
-                    "emotion": "descriptive"
+                    "message": "I swear, I didn't do anything! You've got" +
+                    "the wrong person! I demand to speak to my lawyer!"
+                },
+                {
+                    "speaker": "John Doe",
+                    "message": "Alright, Michael. If you're innocent, we'll" +
+                    "find out. But until then, you're staying right here."
                 }
             ]
         }
+
         try:
             return json.dumps(dialogue)
         except Exception:
