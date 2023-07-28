@@ -6,7 +6,7 @@ from ai_presenter.tools.json_trim import json_trim
 from ai_presenter.text_ai.chat.base import BaseChatGPT
 from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
 from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
-# import ai_presenter.config.env_vars
+from ai_presenter.text_ai.chat.messages import Messages
 
 
 # in the __init__ for this class,
@@ -18,28 +18,24 @@ class TextChatGPT(TextAi):
         self.db = db
         logging.debug(f'Narrator is {use_narrator}')
         if use_narrator:
-            self.messages = INIT_NARRATOR
+            self.messages = Messages(INIT_NARRATOR)
         else:
-            self.messages = INIT_NO_NARRATOR
+            self.messages = Messages(INIT_NO_NARRATOR)
         self.user_message = {}
         self.user_message['actors'] = self.db.get_data()['actors']
 
     def generate(self, s: Scene) -> str:
         self.user_message['scene'] = s.to_map()
-        self.messages.append(
-            {"role": "user", "content": json.dumps(self.user_message)}
-        )
+        self.messages.update_scenes(self.user_message)
         resp = self.chatgpt.create(
             model="gpt-3.5-turbo",
-            messages=self.messages,
+            messages=self.messages.construct(),
         )
         # clear for next time
         # self.messages = []
         self.user_message = {}
 
-        self.messages.append(
-            {"role": "assistant", "content": resp}
-        )
+        self.messages.update_scenes(resp)
         logging.info("Recieved " + resp)
         resp = json_trim(resp)
         try:
