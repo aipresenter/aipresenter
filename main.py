@@ -69,7 +69,7 @@ def plot_run():
     sys.exit(0)
 
 
-def script_run(args):
+def script_run():
     valid_text_options = ['chatgpt', 'fake']
     if args.textai not in valid_text_options:
         print("Please provide a valid option:" +
