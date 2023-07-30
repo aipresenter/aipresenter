@@ -12,7 +12,7 @@ class ScriptChatGPT:
 
     def generate(self, plot: str) -> str:
         logging.info("Getting information from Chatgpt...")
-        self.messages.update_scenes(plot)
+        self.messages.update_scenes(request={"role": "user", "content": plot})
 
         resp = self.chatgpt.create(
             model="gpt-3.5-turbo",

@@ -26,7 +26,9 @@ class TextChatGPT(TextAi):
 
     def generate(self, s: Scene) -> str:
         self.user_message['scene'] = s.to_map()
-        self.messages.update_scenes(self.user_message)
+        self.messages.update_scenes(
+            {"role": "user", "content": json.dumps(self.user_message)}
+        )
         resp = self.chatgpt.create(
             model="gpt-3.5-turbo",
             messages=self.messages.construct(),
@@ -35,7 +37,9 @@ class TextChatGPT(TextAi):
         # self.messages = []
         self.user_message = {}
 
-        self.messages.update_scenes(resp)
+        self.messages.update_scenes(
+            {"role": "assistant", "content": resp}
+        )
         logging.info("Recieved " + resp)
         resp = json_trim(resp)
         try:
