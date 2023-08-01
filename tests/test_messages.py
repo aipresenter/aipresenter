@@ -12,11 +12,11 @@ class TestMessages(unittest.TestCase):
         self.assertEqual(messages.construct(), INIT_NARRATOR)
 
         resp = chat.create('fake', 'test')
-        resp = '{\'role\': \'user\', \'content\':' + resp + '}'
+        req = {'role': 'user', 'content': resp}
 
-        messages.update_scenes(resp)
+        messages.update_scenes(req)
         messages.update_scenes(
-            '{\'role\': \'assistant\', \'content\':' + resp + '}'
+            {'role': 'assistant', 'content': resp}
             )
 
         self.assertIn('{\'role\': \'user\', \'content\':',
@@ -26,10 +26,10 @@ class TestMessages(unittest.TestCase):
 
         for i in range(30):
             resp = chat.create('fake', 'test')
-            resp = '{\'role\': \'user\', \'content\':' + resp + '}'
-            messages.update_scenes(resp)
+            req = {'role': 'user', 'content': resp}
+            messages.update_scenes(req)
             messages.update_scenes(
-                '{\'role\': \'assistant\', \'content\':' + resp + '}'
+                {'role': 'assistant', 'content': resp}
             )
 
         self.assertLess(messages.count_tokens(

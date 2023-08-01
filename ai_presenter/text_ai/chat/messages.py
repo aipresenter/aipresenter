@@ -14,21 +14,31 @@ class Messages:
     def __init__(self, gpt_initializer):
         self.gpt_setup = gpt_initializer
         self.scenes = []
+        self.requests = []
+        self.responses = []
         self.max_token_limit = MAX_TOKEN_LIMIT
         self.soft_token_limit = SOFT_TOKEN_LIMIT
 
     def update_scenes(self, scene):
         self.token_check()
+        if scene['role'] == 'assistant':
+            self.responses.append(scene)
+        if scene['role'] == 'user':
+            self.requests.append(scene)
         self.scenes.append(scene)
 
     def token_check(self):
-        while sum(self.count_tokens(scene)
-                  for scene in self.scenes) > self.soft_token_limit:
-            self.scenes.pop(0)
-            self.scenes.pop(0)
+        while sum(self.count_tokens(scene) for scene in self.requests
+                  and self.responses) > self.soft_token_limit:
+            self.responses.pop(0)
+            self.requests.pop(0)
 
     def construct(self):
-        return self.gpt_setup + self.scenes
+        construct = self.gpt_setup
+        for i in range(self.requests.__len__()):
+            construct += self.requests[i]
+            construct += self.responses[i]
+        return construct
 
     def count_tokens(self, message):
         encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
