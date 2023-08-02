@@ -37,6 +37,9 @@ class TestMessages(unittest.TestCase):
 
         self.assertEqual(messages.get_scene_count() % 2, 0)
 
+        with self.assertRaises(Exception):
+            messages.update_scenes({'role': 'father', 'content': resp})
+
 
 if __name__ == '__main__':
     unittest.main()
