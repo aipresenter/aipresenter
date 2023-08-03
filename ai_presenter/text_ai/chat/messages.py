@@ -13,7 +13,6 @@ SOFT_TOKEN_LIMIT = 2500
 class Messages:
     def __init__(self, gpt_initializer):
         self.gpt_setup = gpt_initializer
-        self.scenes = []
         self.requests = []
         self.responses = []
         self.max_token_limit = MAX_TOKEN_LIMIT
@@ -26,10 +25,8 @@ class Messages:
 
         if scene['role'] == 'assistant':
             self.responses.append(scene)
-            self.scenes.append(scene)
         elif scene['role'] == 'user':
             self.requests.append(scene)
-            self.scenes.append(scene)
         else:
             raise Exception('Invalid role. Expected user or assistant')
 
@@ -39,6 +36,9 @@ class Messages:
             self.responses.pop(0)
             self.requests.pop(0)
 
+    def invariant(self) -> bool:
+        return len(self.requests) == len(self.responses)
+
 # return example:
 # {"role": "system", "content": "You do something"}
 # {"role": "user", "content": json.dumps(example_request)}
@@ -47,6 +47,8 @@ class Messages:
 # {"role": "assistant", "content": json.dumps(self.user_message_response)}
     def construct(self) -> list:
         construct = self.gpt_setup
+        assert len(self.requests) == len(self.responses), +\
+            'Requests and Responses are misaligned'
         for i in range(len(self.requests)):
             construct += self.requests[i]
             construct += self.responses[i]
@@ -57,4 +59,4 @@ class Messages:
         return len(encoding.encode(str(message)))
 
     def get_scene_count(self):
-        return len(self.scenes)
+        return len(self.requests) + len(self.responses)

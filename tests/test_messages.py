@@ -9,7 +9,10 @@ class TestMessages(unittest.TestCase):
     def testMessages(self):
         chat = FakeChatGPT()
         messages = Messages(INIT_NARRATOR)
+        # tests if new messages class contains just
+        # init and that responses and requests are equal
         self.assertEqual(messages.construct(), INIT_NARRATOR)
+        self.assertTrue(messages.invariant())
 
         resp = chat.create('fake', 'test')
         req = {'role': 'user', 'content': resp}
@@ -19,6 +22,8 @@ class TestMessages(unittest.TestCase):
             {'role': 'assistant', 'content': resp}
             )
 
+        # tests that responses and requests were updated correctly
+        self.assertTrue(messages.invariant())
         self.assertIn('{\'role\': \'user\', \'content\':',
                       str(messages.construct()))
         self.assertIn('{\'role\': \'assistant\', \'content\':',
@@ -32,11 +37,16 @@ class TestMessages(unittest.TestCase):
                 {'role': 'assistant', 'content': resp}
             )
 
+        # tests that max token limit isn't breached
+        # and that scene popping works correctly
         self.assertLess(messages.count_tokens(
             messages.construct()), MAX_TOKEN_LIMIT)
 
-        self.assertEqual(messages.get_scene_count() % 2, 0)
+        # tests that requests and responses are same
+        # length after multiple scene pops
+        self.assertTrue(messages.invariant())
 
+        # tests that inproper role raises exception
         with self.assertRaises(Exception):
             messages.update_scenes({'role': 'father', 'content': resp})
 
