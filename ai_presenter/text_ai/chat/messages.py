@@ -1,4 +1,5 @@
 import tiktoken
+import logging
 
 # the absolute maximum number of tokens that
 # can be used in a message for a chatgpt api call
@@ -11,7 +12,7 @@ SOFT_TOKEN_LIMIT = 2500
 
 
 class Messages:
-    def __init__(self, gpt_initializer):
+    def __init__(self, gpt_initializer: list):
         self.gpt_setup = gpt_initializer
         self.requests = []
         self.responses = []
@@ -20,7 +21,7 @@ class Messages:
 
 # scene expected in format of:
 # {"role": "user"/"assistant", "content": json.dumps(self.user_message)}
-    def update_scenes(self, scene: dict):
+    def append(self, scene: dict):
         self.token_check()
 
         if scene['role'] == 'assistant':
@@ -33,11 +34,12 @@ class Messages:
     def token_check(self):
         while sum(self.count_tokens(scene) for scene in self.requests
                   and self.responses) > self.soft_token_limit:
+            logging.debug(f"Messages.token_check: Popping")
             self.responses.pop(0)
             self.requests.pop(0)
 
     def invariant(self) -> bool:
-        return len(self.requests) == len(self.responses)
+        return len(self.requests) >= len(self.responses)
 
 # return example:
 # {"role": "system", "content": "You do something"}
@@ -47,11 +49,12 @@ class Messages:
 # {"role": "assistant", "content": json.dumps(self.user_message_response)}
     def construct(self) -> list:
         construct = self.gpt_setup
-        assert len(self.requests) == len(self.responses), +\
-            'Requests and Responses are misaligned'
-        for i in range(len(self.requests)):
-            construct += self.requests[i]
-            construct += self.responses[i]
+        # len(responsees) because responses will always be less
+        # than or equal to requests
+        for i in range(len(self.responses)):
+            construct.append(self.requests[i])
+            construct.append(self.responses[i])
+        logging.debug(f'Messages.construct: Returning {construct}')
         return construct
 
     def count_tokens(self, message: dict):

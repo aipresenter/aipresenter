@@ -3,6 +3,7 @@ import logging
 from ai_presenter.text_ai.base import TextAi
 from ai_presenter.database import Database, Scene
 from ai_presenter.tools.json_trim import json_trim
+from ai_presenter.text_ai.chat.messages import Messages
 from ai_presenter.text_ai.chat.base import BaseChatGPT
 from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
 from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
@@ -18,9 +19,9 @@ class TextChatGPT(TextAi):
         self.db = db
         logging.debug(f'Narrator is {use_narrator}')
         if use_narrator:
-            self.messages = INIT_NARRATOR
+            self.messages = Messages(INIT_NARRATOR)
         else:
-            self.messages = INIT_NO_NARRATOR
+            self.messages = Messages(INIT_NO_NARRATOR)
         self.user_message = {}
         self.user_message['actors'] = self.db.get_data()['actors']
 
@@ -31,7 +32,7 @@ class TextChatGPT(TextAi):
         )
         resp = self.chatgpt.create(
             model="gpt-3.5-turbo",
-            messages=self.messages,
+            messages=self.messages.construct(),
         )
         # clear for next time
         # self.messages = []

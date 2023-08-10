@@ -16,12 +16,14 @@ class AIPresenter:
 
         with open(text_ai_file, 'w') as file:
             textai = self.generator.get_text()
+            counter = 0
             for scene in self.database.scenes:
-                logging.info(f"Working on scene: {scene.location}")
+                logging.info(f"Working on scene {counter}: {scene.location}")
 
                 output = textai.generate(scene)
                 file.write(output + '\n')
                 logging.info(f'got back from textai: {output}')
+                counter += 1
 
         voiceai = self.generator.get_voice()
         voiceai.generate(text_ai_file, voice_ai_file)
