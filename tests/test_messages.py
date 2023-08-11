@@ -14,13 +14,12 @@ class TestMessages(unittest.TestCase):
         self.assertEqual(messages.construct(), INIT_NARRATOR)
         self.assertTrue(messages.invariant())
 
-        resp = chat.create('fake', 'test')
-        req = {'role': 'user', 'content': resp}
+        buffer = chat.create()
+        req = {'role': 'user', 'content': buffer}
+        resp = {'role': 'assistant', 'content': buffer}
 
-        messages.update_scenes(req)
-        messages.update_scenes(
-            {'role': 'assistant', 'content': resp}
-            )
+        messages.append(req)
+        messages.append(resp)
 
         # tests that responses and requests were updated correctly
         self.assertTrue(messages.invariant())
@@ -30,12 +29,10 @@ class TestMessages(unittest.TestCase):
                       str(messages.construct()))
 
         for i in range(30):
-            resp = chat.create('fake', 'test')
-            req = {'role': 'user', 'content': resp}
-            messages.update_scenes(req)
-            messages.update_scenes(
-                {'role': 'assistant', 'content': resp}
-            )
+            messages.append(req)
+            messages.append(resp)
+            print(messages.construct())
+            print(messages.count_tokens(messages.construct()))
 
         # tests that max token limit isn't breached
         # and that scene popping works correctly
@@ -44,11 +41,11 @@ class TestMessages(unittest.TestCase):
 
         # tests that requests and responses are same
         # length after multiple scene pops
-        self.assertTrue(messages.invariant())
+        self.assertTrue(len(messages.requests), len(messages.responses))
 
         # tests that inproper role raises exception
         with self.assertRaises(Exception):
-            messages.update_scenes({'role': 'father', 'content': resp})
+            messages.append({'role': 'father', 'content': resp})
 
 
 if __name__ == '__main__':

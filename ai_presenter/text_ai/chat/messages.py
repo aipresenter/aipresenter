@@ -1,5 +1,4 @@
 import tiktoken
-import logging
 
 # the absolute maximum number of tokens that
 # can be used in a message for a chatgpt api call
@@ -32,9 +31,8 @@ class Messages:
             raise Exception('Invalid role. Expected user or assistant')
 
     def token_check(self):
-        while sum(self.count_tokens(scene) for scene in self.requests
-                  and self.responses) > self.soft_token_limit:
-            logging.debug(f"Messages.token_check: Popping")
+        while sum(self.count_tokens(scene) for scene
+                  in self.construct()) > self.soft_token_limit:
             self.responses.pop(0)
             self.requests.pop(0)
 
@@ -48,13 +46,13 @@ class Messages:
 # {"role": "user", "content": json.dumps(self.user_message_request)}
 # {"role": "assistant", "content": json.dumps(self.user_message_response)}
     def construct(self) -> list:
-        construct = self.gpt_setup
+        construct = []
+        construct += self.gpt_setup
         # len(responsees) because responses will always be less
         # than or equal to requests
         for i in range(len(self.responses)):
             construct.append(self.requests[i])
             construct.append(self.responses[i])
-        logging.debug(f'Messages.construct: Returning {construct}')
         return construct
 
     def count_tokens(self, message: dict):
