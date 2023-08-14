@@ -1,11 +1,11 @@
 import logging
-from ai_presenter.text_ai.chat.base import BaseChatGPT
+from ai_presenter.text_ai.chat.gpt import ChatGPT
 
 
 class ScriptChatGPT:
-    def __init__(self, chatgpt: BaseChatGPT):
+    def __init__(self):
         # chatgpt parameter added for testing purposes
-        self.chatgpt = chatgpt
+        self.chatgpt = ChatGPT()
         self.messages = [
             {
                 "role": "system",

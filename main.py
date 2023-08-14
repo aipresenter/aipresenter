@@ -123,7 +123,7 @@ def main():
         print("Missing script file")
         sys.exit(1)
 
-    script_run(args)
+    script_run()
 
 
 if __name__ == '__main__':
