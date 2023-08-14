@@ -4,11 +4,6 @@ import tiktoken
 # can be used in a message for a chatgpt api call
 MAX_TOKEN_LIMIT = 4096
 
-# the number of tokens allowed in a message for a chatgpt api call
-# before old scenes start getting deleted in order to keep addition
-# of new scenes from going over the MAX_TOKEN_LIMIT
-SOFT_TOKEN_LIMIT = 2500
-
 
 class Messages:
     def __init__(self, gpt_initializer: list):
@@ -16,7 +11,6 @@ class Messages:
         self.requests = []
         self.responses = []
         self.max_token_limit = MAX_TOKEN_LIMIT
-        self.soft_token_limit = SOFT_TOKEN_LIMIT
 
     # scene expected in format of:
     # {"role": "user"/"assistant", "content": json.dumps(self.user_message)}
@@ -32,7 +26,7 @@ class Messages:
 
     def token_check(self):
         while sum(self.count_tokens(scene) for scene
-                  in self.construct()) > self.soft_token_limit:
+                  in self.construct()) > self.max_token_limit:
             self.responses.pop(0)
             self.requests.pop(0)
 
@@ -48,7 +42,7 @@ class Messages:
     def construct(self) -> list:
         construct = []
         construct += self.gpt_setup
-        # len(responsees) because responses will always be less
+        # len(responses) because responses will always be less
         # than or equal to requests
         for i in range(len(self.responses)):
             construct.append(self.requests[i])
