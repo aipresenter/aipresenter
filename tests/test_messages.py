@@ -31,8 +31,6 @@ class TestMessages(unittest.TestCase):
         for i in range(30):
             messages.append(req)
             messages.append(resp)
-            print(messages.construct())
-            print(messages.count_tokens(messages.construct()))
 
         # tests that max token limit isn't breached
         # and that scene popping works correctly
