@@ -6,7 +6,7 @@ INIT_NARRATOR = [
                 "role": "system",
                 "content": "You will be provided with a set of characters, " +
                 "their description, and a scene in JSON format. " +
-                "Create dialogue using the plot and characters " +
+                "Create a lot of dialogue using the plot and characters " +
                 "provided and return it in JSON format.  Add a narrator" +
                 " with key 'narrator' describing the characters, scene," +
                 " and emotions."
@@ -40,7 +40,7 @@ INIT_NO_NARRATOR = [
                 "role": "system",
                 "content": "You will be provided with a set of characters, " +
                 "their description, and a scene in JSON format. " +
-                "Create dialogue using the plot and characters " +
+                "Create a lot of dialogue using the plot and characters " +
                 "provided and return it in JSON format."
             },
             {

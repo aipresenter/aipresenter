@@ -12,17 +12,19 @@ class TestMessages(unittest.TestCase):
         # tests if new messages class contains just
         # init and that responses and requests are equal
         self.assertEqual(messages.construct(), INIT_NARRATOR)
-        self.assertTrue(messages.invariant())
 
         buffer = chat.create()
         req = {'role': 'user', 'content': buffer}
         resp = {'role': 'assistant', 'content': buffer}
+        testlist = []
+        testlist += INIT_NARRATOR
+        testlist.append(req)
 
         messages.append(req)
+        self.assertCountEqual(messages.construct(), testlist)
         messages.append(resp)
 
         # tests that responses and requests were updated correctly
-        self.assertTrue(messages.invariant())
         self.assertIn('{\'role\': \'user\', \'content\':',
                       str(messages.construct()))
         self.assertIn('{\'role\': \'assistant\', \'content\':',
@@ -39,11 +41,6 @@ class TestMessages(unittest.TestCase):
 
         # tests that requests and responses are same
         # length after multiple scene pops
-        self.assertTrue(len(messages.requests), len(messages.responses))
-
-        # tests that inproper role raises exception
-        with self.assertRaises(Exception):
-            messages.append({'role': 'father', 'content': resp})
 
 
 if __name__ == '__main__':

@@ -6,10 +6,12 @@ from ai_presenter.text_ai.chat.base import BaseChatGPT
 class FakeChatGPT(BaseChatGPT):
     def __init__(self):
         super().__init__()
+        self.counter = 0
 
     def create(self, model='', messages=None):
         logging.debug('chatgpt: got all info')
         dialogue = {
+            "count": self.counter,
             "dialogue": [
                 {
                     "speaker": "John Doe",
@@ -34,6 +36,7 @@ class FakeChatGPT(BaseChatGPT):
                 }
             ]
         }
+        self.counter += 1
 
         try:
             return json.dumps(dialogue)
