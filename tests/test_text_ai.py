@@ -11,19 +11,24 @@ class TestTextAI(unittest.TestCase):
         fakegpt = FakeChatGPT()
         textai = TextChatGPT(db, True, fakegpt)
         # check if messages is recieving proper input
-        for scene in db.scenes:
-            output = textai.generate(scene)
-            output
-            # why is chatgpt now returning the sample respnse as
-            # the first scene?
-            # why is chatgpt repeating scenes
-            # added messages and thats when poop hit the fan
-            # even during runs when messages did not pop, chatgpt still
-            # returned sample input as first scene and repeated scenes
-            # therefore popping scenes is not what is causing chatgpt
-            # to repeat scenes/other funky business
-            # given that append() and construct() are the methods used
-            # 100% of all runs, error must be in there
+        max_loop = 10
+        output = []
+        for i in range(max_loop):
+            for scene in db.scenes:
+                output.append(textai.generate(scene))
+
+        self.assertEqual(len(output), len(db.scenes) * max_loop)
+        # print(output)
+        # why is chatgpt now returning the sample respnse as
+        # the first scene?
+        # why is chatgpt repeating scenes
+        # added messages and thats when poop hit the fan
+        # even during runs when messages did not pop, chatgpt still
+        # returned sample input as first scene and repeated scenes
+        # therefore popping scenes is not what is causing chatgpt
+        # to repeat scenes/other funky business
+        # given that append() and construct() are the methods used
+        # 100% of all runs, error must be in there
 
         # check if messages is popping correctly
         # check if messages is updating the list properly

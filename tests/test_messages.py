@@ -21,7 +21,6 @@ class TestMessages(unittest.TestCase):
         testlist.append(req)
 
         messages.append(req)
-        print(messages.construct())
         self.assertCountEqual(messages.construct(), testlist)
         messages.append(resp)
 
