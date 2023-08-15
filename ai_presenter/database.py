@@ -42,8 +42,8 @@ class Actor:
                                              'Alto', 'Tenor', 'Bass'])
 
         try:
-            self.age = data['age']
-        except KeyError:
+            self.age = int(data['age'])
+        except (KeyError, TypeError, ValueError):
             self.age = random.randint(20, 50)
 
         try:
