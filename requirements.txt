@@ -12,7 +12,7 @@ charset-normalizer==3.1.0
 colorama==0.4.6
 decorator==5.1.1
 distlib==0.3.6
-elevenlabs==0.2.18
+elevenlabs==0.2.24
 executing==1.2.0
 filelock==3.12.0
 flake8==6.0.0
@@ -54,4 +54,5 @@ typing_extensions==4.6.3
 urllib3==2.0.3
 virtualenv==20.23.0
 wcwidth==0.2.6
+websockets==11.0.3
 yarl==1.9.2
