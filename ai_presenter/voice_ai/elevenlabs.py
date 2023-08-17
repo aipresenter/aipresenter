@@ -1,9 +1,10 @@
 from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
 from ai_presenter.database import Database
 from ai_presenter.config.voice import VoiceConfig
-from elevenlabs import generate, save, Iterator, VoiceDesign, Voice
-from elevenlabs import set_api_key
-from elevenlabs.api import Voices
+from packages.elevenlabs.elevenlabs import generate, save
+from packages.elevenlabs.elevenlabs import Iterator, VoiceDesign, Voice
+from packages.elevenlabs.elevenlabs import set_api_key
+from packages.elevenlabs.elevenlabs.api import Voices
 from ai_presenter.config.env_vars import get_elevenlabs_api_key
 import logging
 
@@ -35,6 +36,8 @@ class VoiceAIActorElevenLabs(VoiceAIActor):
         self.voice_design = VoiceDesign(name=self.name,
                                         text=self.sample_text,
                                         gender=self.gender,
+                                        description="from AIPresenter",
+                                        labels={'accent': self.accent},
                                         age=self.age, accent=self.accent,
                                         accent_strength=self.accent_strength)
 
