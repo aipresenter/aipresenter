@@ -1,5 +1,5 @@
 import unittest
-from ai_presenter.tools.json_trim import json_trim
+from aipresenter.ai_presenter.tools.json_trim import json_trim
 
 
 class TestJsonTrim(unittest.TestCase):

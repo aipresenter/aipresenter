@@ -1,8 +1,8 @@
 import unittest
-from ai_presenter.text_ai.chat.messages import Messages
-from ai_presenter.text_ai.chat.messages import MAX_TOKEN_LIMIT
-from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
-from ai_presenter.text_ai.chat.fake import FakeChatGPT
+from aipresenter.ai_presenter.text_ai.chat.messages import Messages
+from aipresenter.ai_presenter.text_ai.chat.messages import MAX_TOKEN_LIMIT
+from aipresenter.ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
+from aipresenter.ai_presenter.text_ai.chat.fake import FakeChatGPT
 
 
 class TestMessages(unittest.TestCase):

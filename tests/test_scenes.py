@@ -1,5 +1,5 @@
 import unittest
-from ai_presenter.reader import Reader
+from aipresenter.ai_presenter.reader import Reader
 
 
 class TestScenes(unittest.TestCase):

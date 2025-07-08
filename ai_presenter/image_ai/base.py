@@ -1,4 +1,4 @@
-from ai_presenter.database import Database
+from aipresenter.ai_presenter.database import Database
 
 
 class ImageAI:

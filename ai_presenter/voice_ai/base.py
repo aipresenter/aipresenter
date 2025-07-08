@@ -1,7 +1,7 @@
-from ai_presenter.database import Database
-from ai_presenter.config.voice import VoiceConfig
-from ai_presenter.tools.age_converter import age_converter
-from packages.elevenlabs.elevenlabs import Iterator, Voice
+from aipresenter.ai_presenter.database import Database
+from aipresenter.ai_presenter.config.voice import VoiceConfig
+from aipresenter.ai_presenter.tools.age_converter import age_converter
+from aipresenter.packages.elevenlabs.elevenlabs import Iterator, Voice
 import json
 import logging
 

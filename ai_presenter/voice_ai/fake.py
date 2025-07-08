@@ -1,7 +1,7 @@
-from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
-from ai_presenter.database import Database
-from ai_presenter.config.voice import VoiceConfig
-from packages.elevenlabs.elevenlabs import Iterator, Voice
+from aipresenter.ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
+from aipresenter.ai_presenter.database import Database
+from aipresenter.ai_presenter.config.voice import VoiceConfig
+from aipresenter.packages.elevenlabs.elevenlabs import Iterator, Voice
 import logging
 
 

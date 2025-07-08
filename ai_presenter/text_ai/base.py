@@ -1,4 +1,4 @@
-from ai_presenter.database import Database, Scene
+from aipresenter.ai_presenter.database import Database, Scene
 
 
 class TextAi:

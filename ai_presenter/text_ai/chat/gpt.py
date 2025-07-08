@@ -1,7 +1,7 @@
 import openai
 import logging
-from ai_presenter.config.env_vars import get_chatgpt_api_key
-from ai_presenter.text_ai.chat.base import BaseChatGPT
+from aipresenter.ai_presenter.config.env_vars import get_chatgpt_api_key
+from aipresenter.ai_presenter.text_ai.chat.base import BaseChatGPT
 
 
 class ChatGPT(BaseChatGPT):

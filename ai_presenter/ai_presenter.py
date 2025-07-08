@@ -1,7 +1,7 @@
 # import json
 import logging
-from ai_presenter.database import Database
-from ai_presenter.generators import Generators
+from aipresenter.ai_presenter.database import Database
+from aipresenter.ai_presenter.generators import Generators
 
 
 class AIPresenter:

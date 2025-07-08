@@ -1,7 +1,7 @@
 import logging
 import json
-from ai_presenter.text_ai.base import TextAi
-from ai_presenter.database import Database
+from aipresenter.ai_presenter.text_ai.base import TextAi
+from aipresenter.ai_presenter.database import Database
 
 
 class TextFake(TextAi):

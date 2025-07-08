@@ -1,4 +1,4 @@
-from ai_presenter.config.ai import AIConfig
+from aipresenter.ai_presenter.config.ai import AIConfig
 
 
 class Config:

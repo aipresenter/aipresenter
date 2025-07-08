@@ -1,7 +1,7 @@
 import unittest
-from ai_presenter.text_ai.chat.fake import FakeChatGPT
-from ai_presenter.text_ai.chat.text import TextChatGPT
-from ai_presenter.reader import Reader
+from aipresenter.ai_presenter.text_ai.chat.fake import FakeChatGPT
+from aipresenter.ai_presenter.text_ai.chat.text import TextChatGPT
+from aipresenter.ai_presenter.reader import Reader
 
 
 class TestFakeChatGPT(unittest.TestCase):

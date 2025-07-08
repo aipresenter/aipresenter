@@ -1,6 +1,6 @@
 import logging
 import random
-from ai_presenter.config.config import Config
+from aipresenter.ai_presenter.config.config import Config
 
 
 class Database:

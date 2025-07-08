@@ -1,6 +1,6 @@
 import logging
 import json
-from ai_presenter.text_ai.chat.base import BaseChatGPT
+from aipresenter.ai_presenter.text_ai.chat.base import BaseChatGPT
 
 
 class FakeChatGPT(BaseChatGPT):

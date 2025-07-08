@@ -2,16 +2,16 @@ import logging
 import argparse
 import sys
 import os
-from ai_presenter.ai_presenter import AIPresenter
-from ai_presenter.reader import Reader
-from ai_presenter.text_ai.fake import TextFake
-from ai_presenter.image_ai.fake import ImageAIFake
-from ai_presenter.ai_presenter import Generators
-from ai_presenter.voice_ai.elevenlabs import ElevenLabs
-from ai_presenter.voice_ai.fake import VoiceAIFake
-from ai_presenter.text_ai.chat.text import TextChatGPT
-from ai_presenter.text_ai.chat.script import ScriptChatGPT
-from ai_presenter.text_ai.chat.gpt import ChatGPT
+from aipresenter.ai_presenter.ai_presenter import AIPresenter
+from aipresenter.ai_presenter.reader import Reader
+from aipresenter.ai_presenter.text_ai.fake import TextFake
+from aipresenter.ai_presenter.image_ai.fake import ImageAIFake
+from aipresenter.ai_presenter.generators import Generators
+from aipresenter.ai_presenter.voice_ai.elevenlabs import ElevenLabs
+from aipresenter.ai_presenter.voice_ai.fake import VoiceAIFake
+from aipresenter.ai_presenter.text_ai.chat.text import TextChatGPT
+from aipresenter.ai_presenter.text_ai.chat.script import ScriptChatGPT
+from aipresenter.ai_presenter.text_ai.chat.gpt import ChatGPT
 
 
 USAGE = '''

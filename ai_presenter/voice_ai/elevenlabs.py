@@ -1,11 +1,11 @@
-from ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
-from ai_presenter.database import Database
-from ai_presenter.config.voice import VoiceConfig
-from packages.elevenlabs.elevenlabs import generate, save
-from packages.elevenlabs.elevenlabs import Iterator, VoiceDesign, Voice
-from packages.elevenlabs.elevenlabs import set_api_key
-from packages.elevenlabs.elevenlabs.api import Voices
-from ai_presenter.config.env_vars import get_elevenlabs_api_key
+from aipresenter.ai_presenter.voice_ai.base import VoiceAI, VoiceAIActor
+from aipresenter.ai_presenter.database import Database
+from aipresenter.ai_presenter.config.voice import VoiceConfig
+from aipresenter.packages.elevenlabs.elevenlabs import generate, save
+from aipresenter.packages.elevenlabs.elevenlabs import Iterator, VoiceDesign, Voice
+from aipresenter.packages.elevenlabs.elevenlabs import set_api_key
+from aipresenter.packages.elevenlabs.elevenlabs.api import Voices
+from aipresenter.ai_presenter.config.env_vars import get_elevenlabs_api_key
 import logging
 
 

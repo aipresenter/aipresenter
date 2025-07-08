@@ -1,4 +1,4 @@
-from ai_presenter.config.defaults import TEXT_AI_FILE, VOICE_AI_FILE
+from aipresenter.ai_presenter.config.defaults import TEXT_AI_FILE, VOICE_AI_FILE
 
 
 class AIConfig:

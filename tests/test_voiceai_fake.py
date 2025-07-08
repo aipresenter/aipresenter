@@ -1,7 +1,7 @@
 import unittest
-from ai_presenter.voice_ai.fake import VoiceAIFake
-from ai_presenter.reader import Reader
-from ai_presenter.text_ai.fake import TextFake
+from aipresenter.ai_presenter.voice_ai.fake import VoiceAIFake
+from aipresenter.ai_presenter.reader import Reader
+from aipresenter.ai_presenter.text_ai.fake import TextFake
 
 
 class TestVoiceAIFake(unittest.TestCase):

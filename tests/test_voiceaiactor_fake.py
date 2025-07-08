@@ -1,6 +1,6 @@
 import unittest
-from ai_presenter.voice_ai.fake import VoiceAIActorFake
-from ai_presenter.config.voice import VoiceConfig
+from aipresenter.ai_presenter.voice_ai.fake import VoiceAIActorFake
+from aipresenter.ai_presenter.config.voice import VoiceConfig
 from elevenlabs import Gender, Age, Accent
 
 

@@ -1,11 +1,11 @@
 import unittest
 import os
-from ai_presenter.ai_presenter import AIPresenter
-from ai_presenter.reader import Reader
-from ai_presenter.text_ai.base import TextAi
-from ai_presenter.voice_ai.base import VoiceAI
-from ai_presenter.database import Database, Scene
-from ai_presenter.generators import Generators
+from aipresenter.ai_presenter.ai_presenter import AIPresenter
+from aipresenter.ai_presenter.reader import Reader
+from aipresenter.ai_presenter.text_ai.base import TextAi
+from aipresenter.ai_presenter.voice_ai.base import VoiceAI
+from aipresenter.ai_presenter.database import Database, Scene
+from aipresenter.ai_presenter.generators import Generators
 
 
 class TestTextAi(TextAi):

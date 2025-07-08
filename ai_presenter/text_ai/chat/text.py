@@ -1,13 +1,13 @@
 import json
 import logging
-from ai_presenter.text_ai.base import TextAi
-from ai_presenter.database import Database, Scene
-from ai_presenter.tools.json_trim import json_trim
-from ai_presenter.text_ai.chat.messages import Messages
-from ai_presenter.text_ai.chat.base import BaseChatGPT
-from ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
-from ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
-# import ai_presenter.config.env_vars
+from aipresenter.ai_presenter.text_ai.base import TextAi
+from aipresenter.ai_presenter.database import Database, Scene
+from aipresenter.ai_presenter.tools.json_trim import json_trim
+from aipresenter.ai_presenter.text_ai.chat.messages import Messages
+from aipresenter.ai_presenter.text_ai.chat.base import BaseChatGPT
+from aipresenter.ai_presenter.text_ai.chat.text_init import INIT_NARRATOR
+from aipresenter.ai_presenter.text_ai.chat.text_init import INIT_NO_NARRATOR
+# importaipresenter.ai_presenter.config.env_vars
 
 
 # in the __init__ for this class,
